@@ -1,0 +1,19 @@
+# Built application files
+*.apk
+*.aab
+*.ap_
+
+# Build directories
+build/
+app/build/
+.gradle/
+
+# Android Studio
+*.iml
+.idea/
+local.properties
+captures/
+
+# OS files
+.DS_Store
+Thumbs.db
