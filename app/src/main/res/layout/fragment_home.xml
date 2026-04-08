@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
+
+        <!-- TOP BAR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Utsav"
+                android:textSize="26sp"
+                android:textColor="#9381FF"
+                android:fontFamily="@font/poppins_bold"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEvents"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Events"
+                android:textSize="13sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/dm_sans"
+                app:backgroundTint="#9381FF"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_search"
+                app:iconTint="#FFFFFF"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_menu"
+                android:layout_marginStart="10dp"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+        <!-- CATEGORIES TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Our Event Categories"
+            android:textSize="16sp"
+            android:textColor="#111111"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- CATEGORIES RECYCLERVIEW -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager=
+                "androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <!-- ARROWS -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="12dp"
+                android:text="←"
+                android:textColor="#9381FF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="→"
+                android:textSize="18sp"
+                android:textColor="#9381FF"/>
+
+        </LinearLayout>
+
+        <!-- FEATURED EVENTS TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Featured Events"
+            android:textSize="16sp"
+            android:textColor="#111111"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- FEATURED CARD -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#EEF0FF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- Event Image -->
+
+                <ImageView
+                    android:id="@+id/imgFeatured"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_featured"
+                    android:adjustViewBounds="true"/>
+
+                <!-- Description box -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="14dp"
+                        android:text="We have hosted the best events which contains emotions, expression and the happiness of the people and describe what emotion they want to feel. With us more than 300+ events are being held and will continue to make your events as memorable as they can be"
+                        android:textSize="12sp"
+                        android:textColor="#444444"
+                        android:fontFamily="@font/dm_sans"
+                        android:lineSpacingMultiplier="1.5"
+                        android:gravity="left"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Explore button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnExplore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:text="Explore →"
+                    android:textSize="13sp"
+                    android:textColor="#111111"
+                    android:fontFamily="@font/dm_sans"
+                    app:backgroundTint="#FFFFFF"
+                    app:strokeColor="#CCCCCC"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- RATED MANAGERS TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rated Managers"
+            android:textSize="16sp"
+            android:textColor="#111111"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- RATED MANAGERS GRID -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- Manager Card 1 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardManager1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#EEF0FF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:src="@drawable/img_manish"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="#9381FF"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+                        <TextView
+                            android:id="@+id/tvManager1Name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manish"
+                            android:textSize="14sp"
+                            android:textColor="#111111"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textStyle="bold"
+                            android:layout_marginStart="8dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvManager1Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The top wedding manager"
+                        android:textSize="11sp"
+                        android:textColor="#555555"
+                        android:fontFamily="@font/dm_sans"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Manager Card 2 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardManager2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#EEF0FF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:src="@drawable/img_manisha"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="#9381FF"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"/>
+
+                        <TextView
+                            android:id="@+id/tvManager2Name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Manisha"
+                            android:textSize="14sp"
+                            android:textColor="#111111"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textStyle="bold"
+                            android:layout_marginStart="8dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvManager2Desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The top conference manager"
+                        android:textSize="11sp"
+                        android:textColor="#555555"
+                        android:fontFamily="@font/dm_sans"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
