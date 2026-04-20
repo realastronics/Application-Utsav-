@@ -2,4 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Utsav Purple Theme -->
+    <color name="purple_primary">#7B61FF</color>
+    <color name="purple_medium">#9B84FF</color>
+    <color name="purple_light">#D4C4FF</color>
+    <color name="purple_very_light">#EDE4FF</color>
+    <color name="purple_ultra_light">#F5F0FF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1A1A2E</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_tertiary">#999999</color>
+
+    <!-- Accent Colors -->
+    <color name="green_positive">#22C55E</color>
+
+    <!-- Backgrounds -->
+    <color name="bg_page">#FAFAFA</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_divider">#EEEEEE</color>
+
+    <!-- Bottom Nav -->
+    <color name="nav_inactive">#999999</color>
+    <color name="nav_active">#7B61FF</color>
 </resources>

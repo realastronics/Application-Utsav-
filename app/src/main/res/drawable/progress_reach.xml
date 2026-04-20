@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/progress_reach.xml -->
+<!-- Custom progress bar: grey background, purple fill, rounded ends -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background track (grey) -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="5dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <!-- Progress fill (purple) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="5dp" />
+                <solid android:color="#7C5CBF" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <activity android:name=".models.StatisticInsightsActivity" />
+    <activity android:name=".models.SelfProfileViewActivity" />
+    <activity android:name=".models.PromotionVisibilityActivity" />
+    <activity android:name=".models.ManagerPerspectiveNotificationActivity" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Utsav"
         tools:targetApi="31">
+        <activity
+            android:name=".models.ManagerDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".models.Promotion_Visibility"
+            android:exported="false" />
+        <activity
+            android:name=".models.ManagerNotification"
+            android:exported="false" />
+        <activity
+            android:name=".models.selfprofileactivity"
+            android:exported="false" />
+        <activity
+            android:name=".progress_reach"
+            android:exported="false" />
+        <activity
+            android:name=".models.Notification_Manager"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

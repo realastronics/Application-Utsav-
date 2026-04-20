@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- ====== TOP BAR ====== -->
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Utsav"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#7C5CBF"
+            android:fontFamily="serif"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_menu"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="#1A1A2E"
+            android:contentDescription="Menu"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <!-- ====== BOTTOM NAV ====== -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <ImageButton android:id="@+id/navHome"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:src="@drawable/ic_home" android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="#BDBDBD" android:contentDescription="Home"/>
+        <ImageButton android:id="@+id/navRequests"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:src="@drawable/ic_requests" android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="#BDBDBD" android:contentDescription="Requests"/>
+        <ImageButton android:id="@+id/navStats"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:src="@drawable/ic_stats" android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="#7C5CBF" android:contentDescription="Stats"/>
+        <ImageButton android:id="@+id/navChat"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:src="@drawable/ic_chat" android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="#BDBDBD" android:contentDescription="Chat"/>
+        <ImageButton android:id="@+id/navProfile"
+            android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+            android:src="@drawable/ic_profile" android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="#BDBDBD" android:contentDescription="Profile"/>
+    </LinearLayout>
+
+    <!-- ====== SCROLLABLE CONTENT ====== -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar"
+        android:layout_above="@id/bottomNav"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
+
+            <!-- ── PROFILE VIEWS card ── -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#F3EEFF">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:id="@+id/iconEye"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_visibility"
+                        android:tint="#7C5CBF"
+                        android:layout_alignParentStart="true"
+                        android:contentDescription="Views" />
+
+                    <TextView
+                        android:id="@+id/tvProfileViewsChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+18%"
+                        android:textSize="12sp"
+                        android:textColor="#7C5CBF"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profile Views"
+                        android:textSize="12sp"
+                        android:textColor="#757575"
+                        android:layout_below="@id/iconEye"
+                        android:layout_marginTop="6dp" />
+
+                    <TextView
+                        android:id="@+id/tvProfileViews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1,284"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A2E"
+                        android:layout_below="@id/iconEye"
+                        android:layout_marginTop="22dp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ── REQUESTS + ENGAGEMENT row ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <!-- Total Requests -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F3EEFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_requests"
+                                android:tint="#7C5CBF"
+                                android:contentDescription="Requests" />
+
+                            <TextView
+                                android:id="@+id/tvRequestsChange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+5%"
+                                android:textSize="11sp"
+                                android:textColor="#7C5CBF"
+                                android:textStyle="bold"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Request"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/tvTotalRequests"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="45"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Engagement -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F3EEFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_bolt"
+                                android:tint="#7C5CBF"
+                                android:contentDescription="Engagement" />
+
+                            <TextView
+                                android:id="@+id/tvEngagementChange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+0.8%"
+                                android:textSize="11sp"
+                                android:textColor="#7C5CBF"
+                                android:textStyle="bold"
+                                android:layout_alignParentEnd="true" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Engagement"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/tvEngagement"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.8%"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- ── PROFILE REACH + CHART card ── -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#F3EEFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Profile Reach (Last 30"
+                            android:textSize="12sp"
+                            android:textColor="#757575" />
+
+                        <TextView
+                            android:id="@+id/tvReachChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+35.4%"
+                            android:textSize="12sp"
+                            android:textColor="#7C5CBF"
+                            android:textStyle="bold"
+                            android:background="@drawable/badge_purple_light"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tvProfileReach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24,512"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A2E"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Chart placeholder — replace with MPAndroidChart in Phase 3 -->
+                    <ImageView
+                        android:id="@+id/ivChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:src="@drawable/chart_placeholder"
+                        android:scaleType="fitXY"
+                        android:contentDescription="Chart" />
+
+                    <!-- Week labels -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="6dp">
+
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="WEEK 1"
+                            android:textSize="10sp" android:textColor="#9E9E9E" android:gravity="center"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="WEEK 2"
+                            android:textSize="10sp" android:textColor="#9E9E9E" android:gravity="center"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="WEEK 3"
+                            android:textSize="10sp" android:textColor="#9E9E9E" android:gravity="center"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                            android:layout_weight="1" android:text="WEEK 4"
+                            android:textSize="10sp" android:textColor="#9E9E9E" android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ====== SERVICE BREAKDOWN ====== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Breakdown"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Corporate Events row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ic_event"
+                    android:background="@drawable/circle_purple_bg"
+                    android:padding="8dp"
+                    android:tint="#7C5CBF"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Corporate" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Corporate Events"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+
+                        <TextView
+                            android:id="@+id/tvCorporatePercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="45%"
+                            android:textSize="13sp"
+                            android:textColor="#7C5CBF"
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="42 bookings this month"
+                        android:textSize="11sp"
+                        android:textColor="#9E9E9E"
+                        android:layout_marginBottom="6dp" />
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:max="100"
+                        android:progress="45"
+                        android:progressDrawable="@drawable/progress_reach" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Private Parties row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ic_party"
+                    android:background="@drawable/circle_purple_bg"
+                    android:padding="8dp"
+                    android:tint="#7C5CBF"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Private" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Private Parties"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+
+                        <TextView
+                            android:id="@+id/tvPrivatePercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30%"
+                            android:textSize="13sp"
+                            android:textColor="#7C5CBF"
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="28 bookings this month"
+                        android:textSize="11sp"
+                        android:textColor="#9E9E9E"
+                        android:layout_marginBottom="6dp" />
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:max="100"
+                        android:progress="30"
+                        android:progressDrawable="@drawable/progress_reach" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Consultations row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/ic_consult"
+                    android:background="@drawable/circle_purple_bg"
+                    android:padding="8dp"
+                    android:tint="#7C5CBF"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Consult" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Consultations"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A2E" />
+
+                        <TextView
+                            android:id="@+id/tvConsultPercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="25%"
+                            android:textSize="13sp"
+                            android:textColor="#7C5CBF"
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15 bookings this month"
+                        android:textSize="11sp"
+                        android:textColor="#9E9E9E"
+                        android:layout_marginBottom="6dp" />
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:max="100"
+                        android:progress="25"
+                        android:progressDrawable="@drawable/progress_reach" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

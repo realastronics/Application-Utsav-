@@ -1,3 +1,56 @@
 <resources>
     <string name="app_name">Utsav</string>
+
+    <!-- Common -->
+    <string name="title_utsav">Utsav</string>
+
+    <!-- Notification Manager -->
+    <string name="title_notifications">Notifications</string>
+    <string name="tab_all">All</string>
+    <string name="tab_activity">Activity</string>
+    <string name="tab_system">System</string>
+    <string name="section_today">Today</string>
+    <string name="section_yesterday">Yesterday</string>
+
+    <!-- Promotion And Visibility -->
+    <string name="title_promotion">Promotion And Visibility</string>
+    <string name="boost_your_reach">Boost Your Reach</string>
+    <string name="price_monthly">INR 60 /month</string>
+    <string name="feature_priority">Priority in Search result</string>
+    <string name="feature_placement">Higher Table Placement</string>
+    <string name="feature_suggested">Suggested to organisers</string>
+    <string name="subscribe_now">Subscribe Now</string>
+    <string name="cancel_terms">Cancel anytime , Terms and conditions applied</string>
+    <string name="visibility_status">Visibility Status</string>
+    <string name="current_tier_free">CURRENT TIER: FREE</string>
+    <string name="current_reach">Current Reach</string>
+    <string name="pro_reach">PRO Reach</string>
+    <string name="boost_potential">+350% potential</string>
+    <string name="free_label">Free</string>
+    <string name="pro_info">Managers with PRO visibility receive an average of 4.2x more booking inquiries</string>
+
+    <!-- Self Profile View -->
+    <string name="profile_name">Farhan Akhter</string>
+    <string name="profile_title">Senior Event Manager</string>
+    <string name="profile_location">New Delhi, IND</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="share">Share</string>
+    <string name="specialization">Specialization</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="view_all">View All</string>
+
+    <!-- Statistic And Insights -->
+    <string name="title_statistics">Statistic And Insights</string>
+    <string name="profile_views">Profile Views</string>
+    <string name="total_request">Total Request</string>
+    <string name="engagement">Engagement</string>
+    <string name="profile_reach_30">Profile Reach (Last 30)</string>
+    <string name="service_breakdown">Service Breakdown</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_chat">Chat</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_profile">Profile</string>
 </resources>
