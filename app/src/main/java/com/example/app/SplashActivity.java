@@ -1,4 +1,4 @@
-package com.example.utsav;
+package com.utsav.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // After SPLASH_DURATION ms, move to AuthActivity
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, AuthActivity.class);
+            Intent intent = new Intent(SplashActivity.this, com.utsav.app.AuthActivity.class);
             startActivity(intent);
             finish(); // remove SplashActivity from the back stack
         }, SPLASH_DURATION);

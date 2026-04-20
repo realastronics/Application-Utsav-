@@ -1,4 +1,4 @@
-package com.example.app;
+package com.utsav.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class SelectActorActivity extends AppCompatActivity {
 
         btnHost.setOnClickListener(v -> {
             // User/Host flow — route to MainActivity (Mitali's home screen)
-            Intent intent = new Intent(SelectActorActivity.this, MainActivity.class);
+            Intent intent = new Intent(SelectActorActivity.this, com.utsav.app.MainActivity.class);
             startActivity(intent);
             finish();
         });

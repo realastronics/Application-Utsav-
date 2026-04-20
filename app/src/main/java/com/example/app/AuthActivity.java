@@ -1,4 +1,4 @@
-package com.example.utsav;
+package com.utsav.app;
 
 import android.content.Intent;
 import android.os.Bundle;
