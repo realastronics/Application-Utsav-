@@ -4,7 +4,7 @@
 
 Utsav is an Android application that bridges the gap between people planning events (like weddings, corporate functions, birthdays, conferences), and the professional event managers equipped to execute them. Hosts browse curated manager profiles, filter by location and budget, and coordinate directly through in-app chat. Managers build a portfolio, define their services, and manage incoming event requests from a dedicated dashboard.
 
---
+-----
 
 ## Table of Contents
 
