@@ -61,7 +61,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void goToSelectActor() {
-        Intent intent = new Intent(AuthActivity.this, SelectActorActivity.class);
+        Intent intent = new Intent(AuthActivity.this, com.utsav.app.SelectActorActivity.class);
         startActivity(intent);
         // Do not call finish() here — user should be able to press back to auth
     }
