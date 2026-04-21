@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.utsav"
+    namespace = "com.utsav.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.utsav"
+        applicationId = "com.utsav.app"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

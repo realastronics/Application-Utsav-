@@ -1,4 +1,4 @@
-package com.example.utsav;
+package com.utsav.app;
 
 import org.junit.Test;
 
