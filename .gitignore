@@ -17,3 +17,5 @@ captures/
 # OS files
 .DS_Store
 Thumbs.db
+
+google-services.json
