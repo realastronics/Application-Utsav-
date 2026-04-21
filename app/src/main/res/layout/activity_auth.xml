@@ -160,6 +160,15 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:indeterminateTint="#7C5CBF" />
+
             <!-- Primary CTA button -->
             <Button
                 android:id="@+id/btn_auth"

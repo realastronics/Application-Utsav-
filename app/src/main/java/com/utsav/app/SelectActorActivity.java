@@ -2,32 +2,50 @@ package com.utsav.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class SelectActorActivity extends AppCompatActivity {
+
+    private FirebaseFirestore db;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_actor);
 
+        db  = FirebaseFirestore.getInstance();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         CardView btnManager = findViewById(R.id.btn_manager);
         CardView btnHost    = findViewById(R.id.btn_host);
 
-        btnManager.setOnClickListener(v -> {
-            // Manager flow — route to ManagerDashboardActivity (Farhan's work)
-            // For now, placeholder toast until that activity exists
-            android.widget.Toast.makeText(this,
-                    "Manager flow coming soon", android.widget.Toast.LENGTH_SHORT).show();
-        });
+        btnManager.setOnClickListener(v -> saveRoleAndNavigate("manager"));
+        btnHost.setOnClickListener(v -> saveRoleAndNavigate("host"));
+    }
 
-        btnHost.setOnClickListener(v -> {
-            // User/Host flow — route to MainActivity (Mitali's home screen)
-            Intent intent = new Intent(SelectActorActivity.this, com.utsav.app.MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
+    private void saveRoleAndNavigate(String role) {
+        db.collection("users").document(uid)
+                .update("role", role)
+                .addOnSuccessListener(unused -> {
+                    if (role.equals("host")) {
+                        startActivity(new Intent(this, MainActivity.class));
+                    } else {
+                        Toast.makeText(this,
+                                "Manager dashboard coming soon", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to save role. Try again.",
+                                Toast.LENGTH_SHORT).show()
+                );
     }
 }
