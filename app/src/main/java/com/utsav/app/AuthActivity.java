@@ -34,20 +34,21 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
 
-        // Init Firebase
+        // Init Firebase first — needed by routeByRole before any UI is inflated
         mAuth = FirebaseAuth.getInstance();
         db    = FirebaseFirestore.getInstance();
 
-        // Check if user is already logged in
-        // If yes, skip auth entirely and route based on saved role
+        // Fast-path: returning user — skip auth UI entirely
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+            setContentView(R.layout.activity_splash); // reuse splash as silent loading bg
             routeByRole(currentUser.getUid());
             return;
         }
 
+        // New / logged-out user — show the auth card normally
+        setContentView(R.layout.activity_auth);
         bindViews();
         setListeners();
     }
@@ -158,7 +159,10 @@ public class AuthActivity extends AppCompatActivity {
         db.collection("users").document(uid)
                 .get()
                 .addOnSuccessListener(document -> {
-                    setLoading(false);
+                    // Guard: progressBar is null when coming from the returning-user
+                    // fast-path (activity_splash inflated, bindViews() never called)
+                    if (progressBar != null) setLoading(false);
+
                     if (document.exists()) {
                         String role = document.getString("role");
                         if (role == null || role.isEmpty()) {
@@ -181,7 +185,8 @@ public class AuthActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    setLoading(false);
+                    // Same guard for the failure path
+                    if (progressBar != null) setLoading(false);
                     Toast.makeText(this, "Network error. Try again.",
                             Toast.LENGTH_SHORT).show();
                 });
