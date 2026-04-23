@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Utsav">
 
+        <activity android:name=".activities.ManagerListActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
