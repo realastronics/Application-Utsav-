@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
+
+        <!-- TOP BAR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Utsav"
+                android:textSize="26sp"
+                android:textColor="#9381FF"
+                android:fontFamily="@font/poppins_bold"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Events"
+                android:textSize="13sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/dm_sans"
+                app:backgroundTint="#9381FF"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_search"
+                app:iconTint="#FFFFFF"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_menu"
+                android:layout_marginStart="10dp"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+        <!-- EVENTS TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Events"
+            android:textSize="18sp"
+            android:textColor="#111111"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- MAIN EVENT IMAGE WITH VIEW BUTTON -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgMainEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_featured1"/>
+
+                <!-- VIEW BUTTON on top right -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="10dp"
+                    android:text="View"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#9381FF"
+                    app:cornerRadius="20dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"/>
+
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- WEDDING TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wedding"
+            android:textSize="18sp"
+            android:textColor="#111111"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="6dp"/>
+
+        <!-- DESCRIPTION -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Dream Wedding is awaiting, try and explore your perfect host to live your best day of the life. Make it more special with us by making us you event managers"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:fontFamily="@font/dm_sans"
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="left"/>
+
+        <!-- REVIEWS ROW -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Avatar stack -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/img_manish"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FFFFFF"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/img_manisha"
+                android:layout_marginStart="-8dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30+Reviews"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/dm_sans"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+        <!-- CATEGORY TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="18sp"
+            android:textColor="#111111"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- CATEGORY GRID ROW 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="10dp">
+
+            <!-- Category 1 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCat1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_cat1"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCat1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="8dp"
+                    android:text="View"
+                    android:textSize="11sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#9381FF"
+                    app:cornerRadius="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </FrameLayout>
+
+            <!-- Category 2 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCat2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_cat2"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCat2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="8dp"
+                    android:text="View"
+                    android:textSize="11sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#9381FF"
+                    app:cornerRadius="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- CATEGORY GRID ROW 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- Category 3 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCat3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_cat3" />
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCat3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="8dp"
+                    android:text="View"
+                    android:textSize="11sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#9381FF"
+                    app:cornerRadius="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </FrameLayout>
+
+            <!-- Category 4 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:id="@+id/imgCat4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_cat4"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCat4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="8dp"
+                    android:text="View"
+                    android:textSize="11sp"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#9381FF"
+                    app:cornerRadius="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
