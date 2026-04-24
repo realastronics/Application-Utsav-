@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.utsav.app.MainActivity;
 import com.utsav.app.R;
 import com.utsav.app.activities.ManagerListActivity;
 
@@ -28,12 +29,18 @@ public class EventsFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // ── "View" button on the featured wedding banner ──────────────────────
-        // Navigates to ManagerListActivity filtered to "Wedding"
+        // ── Hamburger → open sidebar (now that btnMenu exists in the XML) ──
+        view.findViewById(R.id.btnMenu).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openSidebar();
+            }
+        });
+
+        // ── Featured banner "View" → Wedding managers ──
         view.findViewById(R.id.btnViewMain)
                 .setOnClickListener(v -> openManagerList("Wedding"));
 
-        // ── Category grid buttons ─────────────────────────────────────────────
+        // ── Category grid ──
         view.findViewById(R.id.btnCat1)
                 .setOnClickListener(v -> openManagerList("Corporate"));
 
@@ -45,13 +52,7 @@ public class EventsFragment extends Fragment {
 
         view.findViewById(R.id.btnCat4)
                 .setOnClickListener(v -> openManagerList("Funeral"));
-
-        // NOTE: fragment_events.xml does NOT have a btnMenu / hamburger icon.
-        // If you want to add one later, add the ImageView to the XML first,
-        // then wire it up here the same way HomeFragment does.
     }
-
-    // ── Helper ────────────────────────────────────────────────────────────────
 
     private void openManagerList(String category) {
         Intent intent = new Intent(requireContext(), ManagerListActivity.class);
