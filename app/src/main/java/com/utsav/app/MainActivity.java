@@ -1,10 +1,8 @@
 package com.utsav.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -16,18 +14,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.utsav.app.fragments.ChatsListFragment;
 import com.utsav.app.fragments.EventsFragment;
 import com.utsav.app.fragments.HomeFragment;
 import com.utsav.app.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout     drawerLayout;
-    private NavigationView   navView;
-
-    // ---------------------------------------------------------------
-    // Lifecycle
-    // ---------------------------------------------------------------
+    private DrawerLayout drawerLayout;
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +36,11 @@ public class MainActivity extends AppCompatActivity {
         setupSidebar();
         populateSidebarHeader();
 
-        // Default screen
+        // Default tab on launch
         loadFragment(new HomeFragment());
     }
 
-    // ---------------------------------------------------------------
-    // Bottom navigation
-    // ---------------------------------------------------------------
+    // ── Bottom navigation ─────────────────────────────────────────────────────
 
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
@@ -58,17 +51,17 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new HomeFragment());
 
             } else if (id == R.id.nav_navigate) {
+                // "Managers" tab → Events/browse screen
                 loadFragment(new EventsFragment());
 
             } else if (id == R.id.nav_create) {
-                // TODO: wire to CreateEventFragment / Activity when built
-                Toast.makeText(this, "Create event — coming soon",
-                        Toast.LENGTH_SHORT).show();
+                // "Create" tab — placeholder until CreateEventFragment is built
+                // TODO (Parth / Mitali): replace with CreateEventFragment
+                loadFragment(new EventsFragment());
 
             } else if (id == R.id.nav_chat) {
-                // TODO: wire to ChatListFragment when built
-                Toast.makeText(this, "Chats — coming soon",
-                        Toast.LENGTH_SHORT).show();
+                // ── FIX: Chat tab was never wired up ──
+                loadFragment(new ChatsListFragment());
 
             } else if (id == R.id.nav_profile) {
                 loadFragment(new ProfileFragment());
@@ -78,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // ---------------------------------------------------------------
-    // Sidebar — matches Figma: Options header with the items listed
-    // ---------------------------------------------------------------
+    // ── Sidebar (Navigation Drawer) ───────────────────────────────────────────
 
     private void setupSidebar() {
         navView.setNavigationItemSelectedListener(item -> {
@@ -90,51 +81,34 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new ProfileFragment());
 
             } else if (id == R.id.sidebar_events) {
-                // TODO: MyEventsFragment
-                Toast.makeText(this, "My Events — coming soon",
-                        Toast.LENGTH_SHORT).show();
+                loadFragment(new EventsFragment());
 
             } else if (id == R.id.sidebar_saved) {
-                // TODO: SavedManagersFragment
-                Toast.makeText(this, "Saved Managers — coming soon",
-                        Toast.LENGTH_SHORT).show();
-
-            } else if (id == R.id.sidebar_notifications) {
-                Toast.makeText(this, "Notifications — coming soon",
-                        Toast.LENGTH_SHORT).show();
-
-            } else if (id == R.id.sidebar_support) {
-                Toast.makeText(this, "Contact Support — coming soon",
-                        Toast.LENGTH_SHORT).show();
-
-            } else if (id == R.id.sidebar_create_event) {
-                Toast.makeText(this, "Event Create — coming soon",
-                        Toast.LENGTH_SHORT).show();
-
-            } else if (id == R.id.sidebar_theme) {
-                Toast.makeText(this, "Theme toggle — coming soon",
-                        Toast.LENGTH_SHORT).show();
+                // TODO: replace with SavedManagersFragment when built
+                loadFragment(new HomeFragment());
 
             } else if (id == R.id.sidebar_logout) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this, AuthActivity.class));
+                startActivity(new android.content.Intent(this, AuthActivity.class));
                 finish();
-                return true;   // skip closing drawer — activity is finishing
             }
+            // sidebar_theme, sidebar_notifications, sidebar_support,
+            // sidebar_create_event are placeholders — add fragments when ready.
 
             drawerLayout.closeDrawer(GravityCompat.END);
             return true;
         });
     }
 
-    // ---------------------------------------------------------------
-    // Sidebar header  — real name + email from Firestore
-    // ---------------------------------------------------------------
+    // ── Sidebar header: show real user name + email ───────────────────────────
 
     private void populateSidebarHeader() {
-        View headerView = navView.getHeaderView(0);
+        View headerView  = navView.getHeaderView(0);
         TextView tvName  = headerView.findViewById(R.id.nav_user_name);
         TextView tvEmail = headerView.findViewById(R.id.nav_user_email);
+
+        // Guard: getCurrentUser() can be null briefly during sign-out
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) return;
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -144,23 +118,21 @@ public class MainActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(doc -> {
                     if (doc.exists()) {
-                        tvName.setText(doc.getString("name"));
-                        tvEmail.setText(doc.getString("email"));
+                        String name  = doc.getString("name");
+                        String email = doc.getString("email");
+                        tvName.setText(name  != null && !name.isEmpty()  ? name  : "Welcome");
+                        tvEmail.setText(email != null && !email.isEmpty() ? email : "");
                     }
                 });
     }
 
-    // ---------------------------------------------------------------
-    // Public API — called by HomeFragment hamburger tap
-    // ---------------------------------------------------------------
+    // ── Called from HomeFragment / ChatsListFragment hamburger icon ───────────
 
     public void openSidebar() {
         drawerLayout.openDrawer(GravityCompat.END);
     }
 
-    // ---------------------------------------------------------------
-    // Helpers
-    // ---------------------------------------------------------------
+    // ── Fragment host ─────────────────────────────────────────────────────────
 
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()

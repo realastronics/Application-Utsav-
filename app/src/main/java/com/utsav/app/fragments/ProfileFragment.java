@@ -5,15 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.utsav.app.MainActivity;
 import com.utsav.app.R;
 
 public class ProfileFragment extends Fragment {
@@ -27,28 +28,32 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view,
+                              @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        view.findViewById(R.id.btnMenu).setOnClickListener(v -> {
-            if (getActivity() instanceof MainActivity) {
-                ((MainActivity) getActivity()).openSidebar();
-            }
-        });
 
         TextView tvName    = view.findViewById(R.id.tv_profile_name);
         TextView tvContact = view.findViewById(R.id.tv_contact);
         TextView tvAddress = view.findViewById(R.id.tv_home_address);
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // ── FIX: guard against null user (e.g. signed-out edge case) ──
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(getContext(),
+                    "Please log in to view your profile", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String uid = currentUser.getUid();
 
         FirebaseFirestore.getInstance()
                 .collection("users")
                 .document(uid)
                 .get()
                 .addOnSuccessListener(doc -> {
-                    if (doc.exists()) {
-                        tvName.setText(doc.getString("name"));
+                    if (doc.exists() && isAdded()) {
+                        String name = doc.getString("name");
+                        tvName.setText(name != null ? name : "—");
 
                         String contact = doc.getString("contactNumber");
                         tvContact.setText("• Contact: " +
@@ -58,6 +63,20 @@ public class ProfileFragment extends Fragment {
                         tvAddress.setText("• Home Address: " +
                                 (address != null ? address : "Not set"));
                     }
+                })
+                .addOnFailureListener(e -> {
+                    if (isAdded()) {
+                        Toast.makeText(getContext(),
+                                "Failed to load profile", Toast.LENGTH_SHORT).show();
+                    }
                 });
+
+        // ── Edit Profile button ──
+        View btnEdit = view.findViewById(R.id.btn_edit_profile);
+        if (btnEdit != null) {
+            btnEdit.setOnClickListener(v ->
+                    Toast.makeText(getContext(),
+                            "Edit profile coming soon", Toast.LENGTH_SHORT).show());
+        }
     }
 }
