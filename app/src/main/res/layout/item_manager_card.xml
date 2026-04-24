@@ -57,15 +57,12 @@
                         android:textStyle="bold"/>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:id="@+id/imgSaved"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="8dp"
                         android:src="@drawable/ic_saved"
-                        android:layout_marginEnd="8dp"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_heart"/>
+                        app:tint="#9381FF" />
 
                 </LinearLayout>
 

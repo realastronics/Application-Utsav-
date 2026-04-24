@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,52 +45,105 @@ public class ManagerAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Manager m = managers.get(position);
 
-        holder.tvName.setText(m.getName() != null ? m.getName() : "—");
+        holder.tvName.setText(m.getName()  != null ? m.getName()  : "—");
         holder.tvType.setText(m.getEventType() + " Manager");
         holder.tvDesc.setText(m.getDescription());
         holder.tvRating.setText(String.valueOf(m.getRating()));
         holder.tvPhone.setText(m.getPhone() != null ? m.getPhone() : "—");
 
-        // Opens or creates a Firestore chat document, then launches ChatActivity
+        // ── Bookmark icon — save / unsave ─────────────────────────────────────
+        holder.imgSaved.setOnClickListener(v -> toggleSave(v.getContext(), m, holder));
+
+        // ── Chat button — open or create Firestore chat ───────────────────────
         holder.btnChat.setOnClickListener(v -> openOrCreateChat(v.getContext(), m));
 
+        // ── Card tap — profile (placeholder) ─────────────────────────────────
         holder.itemView.setOnClickListener(v ->
                 Toast.makeText(v.getContext(),
                         "Opening " + m.getName() + "'s profile",
                         Toast.LENGTH_SHORT).show());
     }
 
+    // ── Save / unsave ─────────────────────────────────────────────────────────
+
     /**
-     * Checks Firestore for an existing chat between the current host and this manager.
-     * Creates one if none exists, then navigates to ChatActivity.
+     * Writes or deletes a document at:
+     *   users/{hostUid}/savedManagers/{managerId}
      *
-     * Document schema (collection: "chats"):
-     *   hostUid       : String
-     *   managerId     : String
-     *   managerName   : String
-     *   lastMessage   : String
-     *   lastTimestamp : long
+     * The document is a snapshot of the Manager object so
+     * SavedManagersFragment can deserialize it directly.
      */
-    private void openOrCreateChat(Context context, Manager manager) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() == null) {
+    private void toggleSave(Context context, Manager manager, ViewHolder holder) {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Toast.makeText(context, "Please log in first", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (manager.getId() == null || manager.getId().isEmpty()) {
+            Toast.makeText(context, "Manager not yet in database", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        String hostUid     = auth.getCurrentUser().getUid();
-        String managerId   = manager.getId();
-        String managerName = manager.getName();
+        String uid       = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String managerId = manager.getId();
 
-        // Guard: DataProvider/DummyData managers have no Firestore ID set.
-        // Until managers are seeded from Firestore, show a clear message.
-        if (managerId == null || managerId.isEmpty()) {
+        FirebaseFirestore db  = FirebaseFirestore.getInstance();
+        var docRef = db.collection("users")
+                .document(uid)
+                .collection("savedManagers")
+                .document(managerId);
+
+        docRef.get().addOnSuccessListener(snap -> {
+            if (snap.exists()) {
+                // Already saved → unsave
+                docRef.delete()
+                        .addOnSuccessListener(unused -> {
+                            holder.imgSaved.setImageResource(R.drawable.ic_saved);
+                            Toast.makeText(context,
+                                    manager.getName() + " removed from saved",
+                                    Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                // Not saved yet → save
+                Map<String, Object> data = new HashMap<>();
+                data.put("id",          manager.getId());
+                data.put("name",        manager.getName());
+                data.put("email",       manager.getEmail());
+                data.put("bio",         manager.getBio());
+                data.put("location",    manager.getLocation());
+                data.put("phone",       manager.getPhone());
+                data.put("priceRange",  manager.getPriceRange());
+                data.put("rating",      manager.getRating());
+                data.put("reviewCount", manager.getReviewCount());
+                data.put("eventTypes",  manager.getEventTypes());
+
+                docRef.set(data)
+                        .addOnSuccessListener(unused -> {
+                            holder.imgSaved.setImageResource(R.drawable.ic_bookmark); // filled
+                            Toast.makeText(context,
+                                    manager.getName() + " saved!",
+                                    Toast.LENGTH_SHORT).show();
+                        });
+            }
+        });
+    }
+
+    // ── Chat ──────────────────────────────────────────────────────────────────
+
+    private void openOrCreateChat(Context context, Manager manager) {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(context, "Please log in first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (manager.getId() == null || manager.getId().isEmpty()) {
             Toast.makeText(context,
                     "This manager is not yet linked to a Firestore account.",
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
+        String hostUid     = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String managerId   = manager.getId();
+        String managerName = manager.getName();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection(Constants.COLLECTION_CHATS)
@@ -99,22 +153,20 @@ public class ManagerAdapter extends
                 .get()
                 .addOnSuccessListener(snapshot -> {
                     if (!snapshot.isEmpty()) {
-                        // Chat already exists — open it directly
-                        String chatId = snapshot.getDocuments().get(0).getId();
-                        navigateToChat(context, chatId, managerName);
+                        navigateToChat(context,
+                                snapshot.getDocuments().get(0).getId(), managerName);
                     } else {
-                        // No chat yet — create document, then open
-                        Map<String, Object> chatData = new HashMap<>();
-                        chatData.put("hostUid",       hostUid);
-                        chatData.put("managerId",     managerId);
-                        chatData.put("managerName",   managerName);
-                        chatData.put("lastMessage",   "");
-                        chatData.put("lastTimestamp", System.currentTimeMillis());
+                        Map<String, Object> chat = new HashMap<>();
+                        chat.put("hostUid",       hostUid);
+                        chat.put("managerId",     managerId);
+                        chat.put("managerName",   managerName);
+                        chat.put("lastMessage",   "");
+                        chat.put("lastTimestamp", System.currentTimeMillis());
 
                         db.collection(Constants.COLLECTION_CHATS)
-                                .add(chatData)
-                                .addOnSuccessListener(docRef ->
-                                        navigateToChat(context, docRef.getId(), managerName))
+                                .add(chat)
+                                .addOnSuccessListener(ref ->
+                                        navigateToChat(context, ref.getId(), managerName))
                                 .addOnFailureListener(e ->
                                         Toast.makeText(context,
                                                 "Could not start chat. Try again.",
@@ -138,8 +190,9 @@ public class ManagerAdapter extends
     public int getItemCount() { return managers.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvType, tvDesc, tvRating, tvPhone;
-        View btnChat;
+        TextView  tvName, tvType, tvDesc, tvRating, tvPhone;
+        ImageView imgSaved;
+        View      btnChat;
 
         ViewHolder(View v) {
             super(v);
@@ -148,6 +201,7 @@ public class ManagerAdapter extends
             tvDesc   = v.findViewById(R.id.tvManagerDesc);
             tvRating = v.findViewById(R.id.tvRating);
             tvPhone  = v.findViewById(R.id.tvPhone);
+            imgSaved = v.findViewById(R.id.imgSaved);   // bookmark icon
             btnChat  = v.findViewById(R.id.btnChat);
         }
     }

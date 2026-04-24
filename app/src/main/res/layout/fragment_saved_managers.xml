@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- TOP BAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Utsav"
+            android:textSize="26sp"
+            android:textColor="#9381FF"
+            android:fontFamily="@font/poppins_bold"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/btnMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_menu"
+            android:scaleType="fitCenter"
+            android:contentDescription="Menu"/>
+
+    </LinearLayout>
+
+    <!-- TITLE -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Saved Managers"
+        android:textSize="20sp"
+        android:textColor="#1A1A2E"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"/>
+
+    <!-- Empty state -->
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No saved managers yet.\nTap the bookmark icon on any manager card to save them here."
+        android:textSize="14sp"
+        android:textColor="#888888"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:padding="32dp"
+        android:visibility="gone"/>
+
+    <!-- Saved list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSaved"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"/>
+
+</LinearLayout>
