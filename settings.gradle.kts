@@ -21,5 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Utsav"
 include(":app")
-include(":app")
  
