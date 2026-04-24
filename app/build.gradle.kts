@@ -39,6 +39,7 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("androidx.core:core:1.12.0")
+    implementation(libs.material)
     // firebase dependencies
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-auth")
