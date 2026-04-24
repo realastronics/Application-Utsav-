@@ -13,8 +13,7 @@
 
         <!-- ENTRY POINT — must always be SplashActivity -->
         <activity
-            android:name=".SplashActivity"
-            android:exported="true">
+            android:name=".SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -28,9 +27,7 @@
         <activity android:name=".activities.ManagerListActivity"   android:exported="false"/>
 
         <activity
-            android:name=".ChatActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:name=".ChatActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
 
     </application>
 
