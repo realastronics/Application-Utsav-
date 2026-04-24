@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.utsav.app.R;
 import com.utsav.app.adapters.ManagerAdapter;
-import com.utsav.app.utils.DummyData;
+import com.utsav.app.utils.DataProvider;
 
 public class ManagerListActivity extends AppCompatActivity {
 
@@ -18,6 +18,6 @@ public class ManagerListActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.rvManagers);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new ManagerAdapter(
-                DummyData.getManagers()));
+                DataProvider.getManagers()));
     }
 }

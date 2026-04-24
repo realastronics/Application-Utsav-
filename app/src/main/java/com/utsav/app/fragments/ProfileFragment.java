@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.utsav.app.MainActivity;
 import com.utsav.app.R;
 
 public class ProfileFragment extends Fragment {
@@ -28,6 +29,12 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        view.findViewById(R.id.btnMenu).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openSidebar();
+            }
+        });
 
         TextView tvName    = view.findViewById(R.id.tv_profile_name);
         TextView tvContact = view.findViewById(R.id.tv_contact);

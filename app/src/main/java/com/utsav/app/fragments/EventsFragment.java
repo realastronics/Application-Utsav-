@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.utsav.app.MainActivity;
 import com.utsav.app.R;
 
 public class EventsFragment extends Fragment {
@@ -31,6 +33,12 @@ public class EventsFragment extends Fragment {
                         Toast.makeText(getContext(),
                                 "Opening Wedding managers...",
                                 Toast.LENGTH_SHORT).show());
+
+        view.findViewById(R.id.btnMenu).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).openSidebar();
+            }
+        });
 
         view.findViewById(R.id.btnCat1)
                 .setOnClickListener(v ->
