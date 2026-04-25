@@ -15,9 +15,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.utsav.app.fragments.ChatsListFragment;
+import com.utsav.app.fragments.CreateEventFragment;
 import com.utsav.app.fragments.EventsFragment;
 import com.utsav.app.fragments.HomeFragment;
 import com.utsav.app.fragments.ProfileFragment;
+import com.utsav.app.fragments.SavedManagersFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,14 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new EventsFragment());
 
             } else if (id == R.id.nav_create) {
-                // "Create" tab — placeholder until CreateEventFragment is built
-                // TODO (Parth / Mitali): replace with CreateEventFragment
-                loadFragment(new EventsFragment());
+                loadFragment(new CreateEventFragment());
+
 
             } else if (id == R.id.nav_chat) {
                 // ── FIX: Chat tab was never wired up ──
                 loadFragment(new ChatsListFragment());
 
+            } else if (id == R.id.nav_chat) {
+                loadFragment(new SavedManagersFragment());
             } else if (id == R.id.nav_profile) {
                 loadFragment(new ProfileFragment());
             }
@@ -83,9 +86,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.sidebar_events) {
                 loadFragment(new EventsFragment());
 
+            } else if (id == R.id.sidebar_create_event) {
+                loadFragment(new CreateEventFragment());
+
+
             } else if (id == R.id.sidebar_saved) {
-                // TODO: replace with SavedManagersFragment when built
-                loadFragment(new HomeFragment());
+                loadFragment(new SavedManagersFragment());
+                drawerLayout.closeDrawer(GravityCompat.END); // already called below, but safe
 
             } else if (id == R.id.sidebar_logout) {
                 FirebaseAuth.getInstance().signOut();
