@@ -21,8 +21,8 @@
             android:text="Utsav"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#7C5CBF"
-            android:fontFamily="serif"
+            android:textColor="#9381FF"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
@@ -32,7 +32,6 @@
             android:layout_height="36dp"
             android:src="@drawable/ic_menu"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#1A1A2E"
             android:contentDescription="Menu"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
@@ -53,23 +52,23 @@
         <ImageButton android:id="@+id/navHome"
             android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
             android:src="@drawable/ic_home" android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#BDBDBD" android:contentDescription="Home"/>
+            android:contentDescription="Home"/>
         <ImageButton android:id="@+id/navRequests"
             android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
             android:src="@drawable/ic_requests" android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#BDBDBD" android:contentDescription="Requests"/>
+            android:contentDescription="Requests"/>
         <ImageButton android:id="@+id/navStats"
             android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
             android:src="@drawable/ic_stats" android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#7C5CBF" android:contentDescription="Stats"/>
+            android:contentDescription="Stats"/>
         <ImageButton android:id="@+id/navChat"
             android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
             android:src="@drawable/ic_chat" android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#BDBDBD" android:contentDescription="Chat"/>
+             android:contentDescription="Chat"/>
         <ImageButton android:id="@+id/navProfile"
             android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
             android:src="@drawable/ic_profile" android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="#BDBDBD" android:contentDescription="Profile"/>
+             android:contentDescription="Profile"/>
     </LinearLayout>
 
     <!-- ====== SCROLLABLE CONTENT ====== -->
@@ -97,7 +96,7 @@
                 android:layout_marginBottom="12dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#F3EEFF">
+                app:cardBackgroundColor="#EEEEFF">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -109,7 +108,7 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:src="@drawable/ic_visibility"
-                        android:tint="#7C5CBF"
+
                         android:layout_alignParentStart="true"
                         android:contentDescription="Views" />
 
@@ -119,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:text="+18%"
                         android:textSize="12sp"
-                        android:textColor="#7C5CBF"
+                        android:textColor="#9381FF"
                         android:textStyle="bold"
                         android:layout_alignParentEnd="true" />
 
@@ -139,7 +138,7 @@
                         android:text="1,284"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textColor="#1A1A2E"
+                        android:textColor="#000000"
                         android:layout_below="@id/iconEye"
                         android:layout_marginTop="22dp" />
                 </RelativeLayout>
@@ -160,7 +159,7 @@
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="#F3EEFF">
+                    app:cardBackgroundColor="#EEEEFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -177,7 +176,6 @@
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
                                 android:src="@drawable/ic_requests"
-                                android:tint="#7C5CBF"
                                 android:contentDescription="Requests" />
 
                             <TextView
@@ -186,7 +184,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="+5%"
                                 android:textSize="11sp"
-                                android:textColor="#7C5CBF"
+                                android:textColor="#9381FF"
                                 android:textStyle="bold"
                                 android:layout_alignParentEnd="true" />
                         </RelativeLayout>
@@ -206,7 +204,7 @@
                             android:text="45"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -217,7 +215,7 @@
                     android:layout_weight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="0dp"
-                    app:cardBackgroundColor="#F3EEFF">
+                    app:cardBackgroundColor="#EEEEFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -234,7 +232,7 @@
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
                                 android:src="@drawable/ic_bolt"
-                                android:tint="#7C5CBF"
+
                                 android:contentDescription="Engagement" />
 
                             <TextView
@@ -243,7 +241,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="+0.8%"
                                 android:textSize="11sp"
-                                android:textColor="#7C5CBF"
+                                android:textColor="#9381FF"
                                 android:textStyle="bold"
                                 android:layout_alignParentEnd="true" />
                         </RelativeLayout>
@@ -263,7 +261,7 @@
                             android:text="4.8%"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -275,7 +273,7 @@
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#F3EEFF">
+                app:cardBackgroundColor="#EEEEFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -301,7 +299,7 @@
                             android:layout_height="wrap_content"
                             android:text="+35.4%"
                             android:textSize="12sp"
-                            android:textColor="#7C5CBF"
+                            android:textColor="#9381FF"
                             android:textStyle="bold"
                             android:background="@drawable/badge_purple_light"
                             android:paddingStart="8dp"
@@ -318,7 +316,7 @@
                         android:text="24,512"
                         android:textSize="26sp"
                         android:textStyle="bold"
-                        android:textColor="#1A1A2E"
+                        android:textColor="#000000"
                         android:layout_marginBottom="12dp" />
 
                     <!-- Chart placeholder — replace with MPAndroidChart in Phase 3 -->
@@ -360,7 +358,7 @@
                 android:text="Service Breakdown"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"
+                android:textColor="#000000"
                 android:layout_marginBottom="14dp" />
 
             <!-- Corporate Events row -->
@@ -375,9 +373,9 @@
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:src="@drawable/ic_event"
-                    android:background="@drawable/circle_purple_bg"
+                    android:background="@drawable/circle_solid_purple"
                     android:padding="8dp"
-                    android:tint="#7C5CBF"
+
                     android:layout_marginEnd="12dp"
                     android:contentDescription="Corporate" />
 
@@ -398,7 +396,7 @@
                             android:text="Corporate Events"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/tvCorporatePercent"
@@ -406,7 +404,7 @@
                             android:layout_height="wrap_content"
                             android:text="45%"
                             android:textSize="13sp"
-                            android:textColor="#7C5CBF"
+                            android:textColor="#9381FF"
                             android:textStyle="bold"
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>
@@ -441,9 +439,9 @@
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:src="@drawable/ic_party"
-                    android:background="@drawable/circle_purple_bg"
+                    android:background="@drawable/circle_solid_purple"
                     android:padding="8dp"
-                    android:tint="#7C5CBF"
+
                     android:layout_marginEnd="12dp"
                     android:contentDescription="Private" />
 
@@ -464,7 +462,7 @@
                             android:text="Private Parties"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/tvPrivatePercent"
@@ -472,7 +470,7 @@
                             android:layout_height="wrap_content"
                             android:text="30%"
                             android:textSize="13sp"
-                            android:textColor="#7C5CBF"
+                            android:textColor="#9381FF"
                             android:textStyle="bold"
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>
@@ -507,9 +505,9 @@
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:src="@drawable/ic_consult"
-                    android:background="@drawable/circle_purple_bg"
+                    android:background="@drawable/circle_solid_purple"
                     android:padding="8dp"
-                    android:tint="#7C5CBF"
+
                     android:layout_marginEnd="12dp"
                     android:contentDescription="Consult" />
 
@@ -530,7 +528,7 @@
                             android:text="Consultations"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/tvConsultPercent"
@@ -538,7 +536,7 @@
                             android:layout_height="wrap_content"
                             android:text="25%"
                             android:textSize="13sp"
-                            android:textColor="#7C5CBF"
+                            android:textColor="#9381FF"
                             android:textStyle="bold"
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>

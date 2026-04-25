@@ -3,5 +3,5 @@
 <!-- Solid purple circle — used as rocket icon background in Boost card -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="#7C5CBF" />
+    <solid android:color="#9381FF" />
 </shape>

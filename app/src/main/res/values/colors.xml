@@ -11,7 +11,7 @@
     <color name="purple_ultra_light">#F5F0FF</color>
 
     <!-- Text Colors -->
-    <color name="text_primary">#1A1A2E</color>
+    <color name="text_primary">#000000</color>
     <color name="text_secondary">#666666</color>
     <color name="text_tertiary">#999999</color>
 

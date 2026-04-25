@@ -22,8 +22,8 @@
             android:text="Utsav"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#7C5CBF"
-            android:fontFamily="serif"
+            android:textColor="#9381FF"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
@@ -36,7 +36,7 @@
             android:contentDescription="Menu"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:tint="#1A1A2E" />
+            />
     </RelativeLayout>
 
     <!-- ==================== BOTTOM NAV ==================== -->
@@ -59,7 +59,7 @@
             android:src="@drawable/ic_home"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Home"
-            android:tint="#BDBDBD" />
+             />
 
         <ImageButton
             android:id="@+id/navRequests"
@@ -69,7 +69,7 @@
             android:src="@drawable/ic_requests"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Requests"
-            android:tint="#BDBDBD" />
+           />
 
         <ImageButton
             android:id="@+id/navStats"
@@ -79,7 +79,7 @@
             android:src="@drawable/ic_stats"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Stats"
-            android:tint="#7C5CBF" />
+             />
 
         <ImageButton
             android:id="@+id/navChat"
@@ -89,7 +89,7 @@
             android:src="@drawable/ic_chat"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Chat"
-            android:tint="#BDBDBD" />
+           />
 
         <ImageButton
             android:id="@+id/navProfile"
@@ -99,7 +99,7 @@
             android:src="@drawable/ic_profile"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Profile"
-            android:tint="#BDBDBD" />
+             />
     </LinearLayout>
 
     <!-- ==================== SCROLLABLE CONTENT ==================== -->
@@ -135,7 +135,7 @@
                     android:contentDescription="Back"
                     android:layout_centerVertical="true"
                     android:layout_alignParentStart="true"
-                    android:tint="#1A1A2E" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -143,7 +143,7 @@
                     android:text="Promotion And Visibility"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A2E"
+                    android:textColor="#000000"
                     android:layout_centerInParent="true" />
             </RelativeLayout>
 
@@ -155,7 +155,7 @@
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#EDE7F6">
+                app:cardBackgroundColor="#EEEEFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,7 +180,6 @@
                             android:layout_height="32dp"
                             android:src="@drawable/ic_rocket"
                             android:layout_gravity="center"
-                            android:tint="#FFFFFF"
                             android:contentDescription="Boost" />
                     </FrameLayout>
 
@@ -191,7 +190,7 @@
                         android:text="Boost Your Reach"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="#1A1A2E"
+                        android:textColor="#000000"
                         android:layout_marginBottom="4dp" />
 
                     <!-- Price -->
@@ -223,7 +222,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:src="@drawable/ic_check_circle"
-                                android:tint="#7C5CBF"
+
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="Check" />
 
@@ -232,7 +231,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Priority in Search result"
                                 android:textSize="14sp"
-                                android:textColor="#1A1A2E" />
+                                android:textColor="#000000" />
                         </LinearLayout>
 
                         <!-- Feature 2 -->
@@ -247,7 +246,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:src="@drawable/ic_check_circle"
-                                android:tint="#7C5CBF"
+
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="Check" />
 
@@ -256,7 +255,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Higher Table Placement"
                                 android:textSize="14sp"
-                                android:textColor="#1A1A2E" />
+                                android:textColor="#000000" />
                         </LinearLayout>
 
                         <!-- Feature 3 -->
@@ -270,7 +269,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:src="@drawable/ic_check_circle"
-                                android:tint="#7C5CBF"
+
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="Check" />
 
@@ -279,7 +278,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Suggested to organisers"
                                 android:textSize="14sp"
-                                android:textColor="#1A1A2E" />
+                                android:textColor="#000000" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -292,7 +291,7 @@
                         android:textSize="15sp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
-                        android:backgroundTint="#7C5CBF"
+                        android:backgroundTint="#9381FF"
                         app:cornerRadius="24dp"
                         android:layout_marginBottom="12dp" />
 
@@ -336,14 +335,14 @@
                             android:text="Visibility Status"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
 
                         <ImageView
                             android:id="@+id/ivVisibilityEye"
                             android:layout_width="22dp"
                             android:layout_height="22dp"
                             android:src="@drawable/ic_visibility"
-                            android:tint="#7C5CBF"
+
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:contentDescription="Visibility" />
@@ -371,7 +370,7 @@
                             android:layout_height="wrap_content"
                             android:text="Current Reach"
                             android:textSize="13sp"
-                            android:textColor="#1A1A2E" />
+                            android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/tvPotential"
@@ -379,7 +378,7 @@
                             android:layout_height="wrap_content"
                             android:text="+350% potential"
                             android:textSize="13sp"
-                            android:textColor="#7C5CBF"
+                            android:textColor="#9381FF"
                             android:textStyle="bold"
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>
@@ -413,7 +412,7 @@
                             android:layout_height="wrap_content"
                             android:text="PRO Reach"
                             android:textSize="11sp"
-                            android:textColor="#7C5CBF"
+                            android:textColor="#9381FF"
                             android:layout_alignParentEnd="true" />
                     </RelativeLayout>
 
@@ -428,7 +427,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_stats"
-                            android:tint="#7C5CBF"
+
                             android:layout_marginEnd="10dp"
                             android:contentDescription="Stats" />
 
