@@ -9,23 +9,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Utsav">
 
-        <!-- ENTRY POINT — must always be SplashActivity -->
+        <!-- Launch Screen -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <!-- Auth flow -->
-        <activity android:name=".AuthActivity" android:exported="false"/>
-        <activity android:name=".SelectActorActivity" android:exported="false"/>
+        <!-- Common Screens -->
+        <activity
+            android:name=".AuthActivity"
+            android:exported="false" />
 
-        <!-- User flow — Mitali's screens -->
-        <activity android:name=".MainActivity" android:exported="false"/>
-        <activity android:name=".activities.ManagerListActivity" android:exported="false"/>
+        <activity
+            android:name=".SelectActorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- Activities Package -->
+        <activity
+            android:name=".activities.ManagerListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activities.SupportActivity"
+            android:exported="false" />
 
     </application>
 

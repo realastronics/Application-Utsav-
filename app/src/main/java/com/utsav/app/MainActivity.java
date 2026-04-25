@@ -16,18 +16,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.utsav.app.activities.SupportActivity;
 import com.utsav.app.fragments.EventsFragment;
 import com.utsav.app.fragments.HomeFragment;
 import com.utsav.app.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout     drawerLayout;
-    private NavigationView   navView;
-
-    // ---------------------------------------------------------------
-    // Lifecycle
-    // ---------------------------------------------------------------
+    private DrawerLayout drawerLayout;
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +32,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navView      = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
 
         setupBottomNav();
         setupSidebar();
         populateSidebarHeader();
 
-        // Default screen
         loadFragment(new HomeFragment());
     }
 
-    // ---------------------------------------------------------------
-    // Bottom navigation
-    // ---------------------------------------------------------------
+    // ---------------------------------------------------
+    // Bottom Navigation
+    // ---------------------------------------------------
 
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -61,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new EventsFragment());
 
             } else if (id == R.id.nav_create) {
-                // TODO: wire to CreateEventFragment / Activity when built
-                Toast.makeText(this, "Create event — coming soon",
+                Toast.makeText(this,
+                        "Create Event - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.nav_chat) {
-                // TODO: wire to ChatListFragment when built
-                Toast.makeText(this, "Chats — coming soon",
+                Toast.makeText(this,
+                        "Chats - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.nav_profile) {
@@ -78,48 +75,66 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // ---------------------------------------------------------------
-    // Sidebar — matches Figma: Options header with the items listed
-    // ---------------------------------------------------------------
+    // ---------------------------------------------------
+    // Sidebar Navigation
+    // ---------------------------------------------------
 
     private void setupSidebar() {
+
         navView.setNavigationItemSelectedListener(item -> {
+
             int id = item.getItemId();
 
             if (id == R.id.sidebar_profile) {
+
                 loadFragment(new ProfileFragment());
 
             } else if (id == R.id.sidebar_events) {
-                // TODO: MyEventsFragment
-                Toast.makeText(this, "My Events — coming soon",
+
+                Toast.makeText(this,
+                        "My Events - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.sidebar_saved) {
-                // TODO: SavedManagersFragment
-                Toast.makeText(this, "Saved Managers — coming soon",
+
+                Toast.makeText(this,
+                        "Saved Managers - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.sidebar_notifications) {
-                Toast.makeText(this, "Notifications — coming soon",
+
+                Toast.makeText(this,
+                        "Notifications - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.sidebar_support) {
-                Toast.makeText(this, "Contact Support — coming soon",
-                        Toast.LENGTH_SHORT).show();
+
+                Intent intent =
+                        new Intent(MainActivity.this, SupportActivity.class);
+                startActivity(intent);
 
             } else if (id == R.id.sidebar_create_event) {
-                Toast.makeText(this, "Event Create — coming soon",
+
+                Toast.makeText(this,
+                        "Create Event - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.sidebar_theme) {
-                Toast.makeText(this, "Theme toggle — coming soon",
+
+                Toast.makeText(this,
+                        "Theme Toggle - coming soon",
                         Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.sidebar_logout) {
+
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this, AuthActivity.class));
+
+                startActivity(
+                        new Intent(MainActivity.this, AuthActivity.class)
+                );
+
                 finish();
-                return true;   // skip closing drawer — activity is finishing
+                return true;
             }
 
             drawerLayout.closeDrawer(GravityCompat.END);
@@ -127,50 +142,74 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // ---------------------------------------------------------------
-    // Sidebar header  — real name + email from Firestore
-    // ---------------------------------------------------------------
+    // ---------------------------------------------------
+    // Sidebar Header
+    // ---------------------------------------------------
 
     private void populateSidebarHeader() {
+
         View headerView = navView.getHeaderView(0);
-        TextView tvName  = headerView.findViewById(R.id.nav_user_name);
-        TextView tvEmail = headerView.findViewById(R.id.nav_user_email);
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        TextView tvName =
+                headerView.findViewById(R.id.nav_user_name);
 
-        FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(uid)
-                .get()
-                .addOnSuccessListener(doc -> {
-                    if (doc.exists()) {
-                        tvName.setText(doc.getString("name"));
-                        tvEmail.setText(doc.getString("email"));
-                    }
-                });
+        TextView tvEmail =
+                headerView.findViewById(R.id.nav_user_email);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+            String uid =
+                    FirebaseAuth.getInstance()
+                            .getCurrentUser()
+                            .getUid();
+
+            FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+
+                        if (documentSnapshot.exists()) {
+
+                            tvName.setText(
+                                    documentSnapshot.getString("name")
+                            );
+
+                            tvEmail.setText(
+                                    documentSnapshot.getString("email")
+                            );
+                        }
+                    });
+        }
     }
 
-    // ---------------------------------------------------------------
-    // Public API — called by HomeFragment hamburger tap
-    // ---------------------------------------------------------------
+    // ---------------------------------------------------
+    // Open Sidebar
+    // ---------------------------------------------------
 
     public void openSidebar() {
         drawerLayout.openDrawer(GravityCompat.END);
     }
 
-    // ---------------------------------------------------------------
-    // Helpers
-    // ---------------------------------------------------------------
+    // ---------------------------------------------------
+    // Load Fragment
+    // ---------------------------------------------------
 
     private void loadFragment(Fragment fragment) {
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();
     }
 
+    // ---------------------------------------------------
+    // Back Press
+    // ---------------------------------------------------
+
     @Override
     public void onBackPressed() {
+
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
             drawerLayout.closeDrawer(GravityCompat.END);
         } else {
