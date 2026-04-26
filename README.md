@@ -78,6 +78,7 @@ app/src/main/
     ├── drawable/          # Icons, backgrounds, shape drawables
     ├── menu/              # Bottom navigation menu
     └── values/            # colors.xml, strings.xml, themes.xml
+
 ```
 
 ### Key models (shared across both flows)
@@ -90,6 +91,7 @@ app/src/main/
 | `User.java` | Host profile data |
 
 > **Rule:** `models/` and `utils/` are shared contracts. Neither team modifies them without a group discussion first.
+
 ---
 
 ## Getting Started
@@ -112,6 +114,7 @@ git clone https://github.com/your-org/utsav.git
 # Let Gradle sync, then run on emulator or device
 ```
 All data for manager, users and chats is stored in firestore. Chat workflow is working.
+
 ---
 
 ## Branch Strategy
@@ -121,12 +124,14 @@ main                    ← stable, reviewed code only
  └── develop            ← integration branch — both teams merge here first
       ├── feature/user-flow/mitali & parth      
       └── feature/manager-flow/Farhan & Mehak
+
 ```
 
 **Rules**
 - No direct pushes to `main`
 - All work goes to your feature branch → PR into `develop` → reviewed → merged to `main`
 - Commit format: `[area] Short description` — e.g. `[user] Add ManagerListActivity` or `[manager] Wire RequestsFragment adapter`
+- 
 ---
 
 ## Team
@@ -137,6 +142,7 @@ main                    ← stable, reviewed code only
 | Parth | User flow |
 | Farhan | Manager flow |
 | Mehak | Manager flow |
+
 ---
 
 ## Roadmap
