@@ -37,9 +37,8 @@ public class SelectActorActivity extends AppCompatActivity {
                     if (role.equals("host")) {
                         startActivity(new Intent(this, MainActivity.class));
                     } else {
-                        Toast.makeText(this,
-                                "Manager dashboard coming soon", Toast.LENGTH_SHORT).show();
-                        return;
+                        startActivity(new Intent(this, com.utsav.app.activities.ManagerDashboardActivity.class));
+                        finish();
                     }
                     finish();
                 })

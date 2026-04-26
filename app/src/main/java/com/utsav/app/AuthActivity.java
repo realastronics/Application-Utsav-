@@ -171,11 +171,7 @@ public class AuthActivity extends AppCompatActivity {
                         } else if (role.equals("host")) {
                             startActivity(new Intent(this, MainActivity.class));
                         } else if (role.equals("manager")) {
-                            // Route to ManagerDashboardActivity when Farhan builds it
-                            // Temporary: toast for now
-                            Toast.makeText(this, "Manager dashboard coming soon",
-                                    Toast.LENGTH_SHORT).show();
-                            return;
+                            startActivity(new Intent(this, com.utsav.app.activities.ManagerDashboardActivity.class));
                         }
                         finish();
                     } else {
