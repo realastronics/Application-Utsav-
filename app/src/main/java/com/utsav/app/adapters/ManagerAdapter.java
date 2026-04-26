@@ -57,6 +57,9 @@ public class ManagerAdapter extends
         // ── Chat button — open or create Firestore chat ───────────────────────
         holder.btnChat.setOnClickListener(v -> openOrCreateChat(v.getContext(), m));
 
+        // ── Hire button — start creation flow ──────────────────────────────
+        holder.btnHire.setOnClickListener(v -> openHireFlow(v.getContext(), m));
+
         // ── Card tap — profile (placeholder) ─────────────────────────────────
         holder.itemView.setOnClickListener(v ->
                 Toast.makeText(v.getContext(),
@@ -156,27 +159,44 @@ public class ManagerAdapter extends
                         navigateToChat(context,
                                 snapshot.getDocuments().get(0).getId(), managerName);
                     } else {
-                        Map<String, Object> chat = new HashMap<>();
-                        chat.put("hostUid",       hostUid);
-                        chat.put("managerId",     managerId);
-                        chat.put("managerName",   managerName);
-                        chat.put("lastMessage",   "");
-                        chat.put("lastTimestamp", System.currentTimeMillis());
+                        // Fetch host name first
+                        db.collection("users").document(hostUid).get()
+                                .addOnSuccessListener(hostDoc -> {
+                                    String hName = hostDoc.getString("name");
+                                    final String hostName = (hName != null) ? hName : "Host";
 
-                        db.collection(Constants.COLLECTION_CHATS)
-                                .add(chat)
-                                .addOnSuccessListener(ref ->
-                                        navigateToChat(context, ref.getId(), managerName))
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(context,
-                                                "Could not start chat. Try again.",
-                                                Toast.LENGTH_SHORT).show());
+                                    Map<String, Object> chat = new HashMap<>();
+                                    chat.put("hostUid",       hostUid);
+                                    chat.put("managerId",     managerId);
+                                    chat.put("managerName",   managerName);
+                                    chat.put("hostName",      hostName);
+                                    chat.put("lastMessage",   "");
+                                    chat.put("lastTimestamp", System.currentTimeMillis());
+
+                                    db.collection(Constants.COLLECTION_CHATS)
+                                            .add(chat)
+                                            .addOnSuccessListener(ref ->
+                                                    navigateToChat(context, ref.getId(), managerName))
+                                            .addOnFailureListener(e ->
+                                                    Toast.makeText(context,
+                                                            "Could not start chat. Try again.",
+                                                            Toast.LENGTH_SHORT).show());
+                                });
                     }
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(context,
                                 "Network error. Check your connection.",
                                 Toast.LENGTH_SHORT).show());
+    }
+
+    private void openHireFlow(Context context, Manager manager) {
+        Intent intent = new Intent(context, com.utsav.app.MainActivity.class);
+        intent.putExtra("targetFragment", "create");
+        intent.putExtra("managerId",      manager.getId());
+        // Use flags to avoid creating a new stack if already in MainActivity
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
     }
 
     private void navigateToChat(Context context, String chatId, String managerName) {
@@ -192,7 +212,7 @@ public class ManagerAdapter extends
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView  tvName, tvType, tvDesc, tvRating, tvPhone;
         ImageView imgSaved;
-        View      btnChat;
+        View      btnChat, btnHire;
 
         ViewHolder(View v) {
             super(v);
@@ -203,6 +223,7 @@ public class ManagerAdapter extends
             tvPhone  = v.findViewById(R.id.tvPhone);
             imgSaved = v.findViewById(R.id.imgSaved);   // bookmark icon
             btnChat  = v.findViewById(R.id.btnChat);
+            btnHire  = v.findViewById(R.id.btnHire);
         }
     }
 }

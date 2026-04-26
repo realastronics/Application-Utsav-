@@ -100,7 +100,7 @@ public class ManagerSelfProfileActivity extends AppCompatActivity {
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             } else if (id == R.id.manager_sidebar_notifications) {
-                startActivity(new Intent(this, ManagerNotificationsActivity.class));
+                startActivity(new Intent(this, com.utsav.app.activities.NotificationsActivity.class));
             }
             drawerLayout.closeDrawer(GravityCompat.END);
             return true;
@@ -227,7 +227,7 @@ public class ManagerSelfProfileActivity extends AppCompatActivity {
         });
         // Self profile item is current screen — no action
         findViewById(R.id.nav_notifications).setOnClickListener(v ->
-                startActivity(new Intent(this, ManagerNotificationsActivity.class)));
+                startActivity(new Intent(this, com.utsav.app.activities.NotificationsActivity.class)));
     }
 
     @Override

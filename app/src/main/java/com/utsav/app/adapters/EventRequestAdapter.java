@@ -17,19 +17,23 @@ import java.util.List;
 public class EventRequestAdapter extends
         RecyclerView.Adapter<EventRequestAdapter.ViewHolder> {
 
-    public interface OnAccept  { void onAccept(EventRequest req); }
-    public interface OnDecline { void onDecline(EventRequest req); }
+    public interface OnAccept    { void onAccept(EventRequest req); }
+    public interface OnDecline   { void onDecline(EventRequest req); }
+    public interface OnItemClick { void onItemClick(EventRequest req); }
 
     private final List<EventRequest> items;
-    private final OnAccept  onAccept;
-    private final OnDecline onDecline;
+    private final OnAccept    onAccept;
+    private final OnDecline   onDecline;
+    private final OnItemClick onItemClick;
 
     public EventRequestAdapter(List<EventRequest> items,
                                OnAccept onAccept,
-                               OnDecline onDecline) {
-        this.items     = items;
-        this.onAccept  = onAccept;
-        this.onDecline = onDecline;
+                               OnDecline onDecline,
+                               OnItemClick onItemClick) {
+        this.items       = items;
+        this.onAccept    = onAccept;
+        this.onDecline   = onDecline;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
@@ -62,16 +66,36 @@ public class EventRequestAdapter extends
         holder.tvEventType.setText(req.getType() != null ? req.getType() : "—");
         holder.tvEventDate.setText(req.getDate() != null ? req.getDate() : "—");
 
+        // Status badge
+        String status = req.getStatus() != null ? req.getStatus() : "pending";
+        holder.tvStatus.setText(status.toUpperCase());
+        holder.tvStatus.setVisibility(View.VISIBLE);
+        
+        if ("accepted".equals(status)) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_accepted);
+            holder.btnAccept.setVisibility(View.GONE);
+            holder.btnDecline.setVisibility(View.GONE);
+        } else if ("rejected".equals(status)) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_rejected);
+            holder.btnAccept.setVisibility(View.GONE);
+            holder.btnDecline.setVisibility(View.GONE);
+        } else {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_pending);
+            holder.btnAccept.setVisibility(View.VISIBLE);
+            holder.btnDecline.setVisibility(View.VISIBLE);
+        }
+
         // Buttons
         holder.btnAccept.setOnClickListener(v -> onAccept.onAccept(req));
         holder.btnDecline.setOnClickListener(v -> onDecline.onDecline(req));
+        holder.itemView.setOnClickListener(v -> onItemClick.onItemClick(req));
     }
 
     @Override
     public int getItemCount() { return items.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView       tvInitial, tvHostName, tvBudget, tvEventType, tvEventDate;
+        TextView       tvInitial, tvHostName, tvBudget, tvEventType, tvEventDate, tvStatus;
         MaterialButton btnAccept, btnDecline;
 
         ViewHolder(View v) {
@@ -81,6 +105,7 @@ public class EventRequestAdapter extends
             tvBudget    = v.findViewById(R.id.tvBudget);
             tvEventType = v.findViewById(R.id.tvEventType);
             tvEventDate = v.findViewById(R.id.tvEventDate);
+            tvStatus    = v.findViewById(R.id.tvStatus);
             btnAccept   = v.findViewById(R.id.btnAccept);
             btnDecline  = v.findViewById(R.id.btnDecline);
         }

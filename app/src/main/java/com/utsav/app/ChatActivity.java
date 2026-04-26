@@ -101,7 +101,6 @@ public class ChatActivity extends AppCompatActivity {
         msgData.put("senderId",   currentUid);
         msgData.put("text",       text);
         msgData.put("timestamp",  System.currentTimeMillis());
-        msgData.put("sentByUser", true);
 
         // Write message to sub-collection
         db.collection(Constants.COLLECTION_CHATS)

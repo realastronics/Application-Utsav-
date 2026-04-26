@@ -18,6 +18,14 @@ public class EventRequest {
     private String budgetRange;
     private String managerId;
     private String status;
+    private String location;
+    private String guests;
+    private String description;
+    private String duration;
+    private String style;
+    private String specialRequests;
+    private String clientEmail;
+    private String clientPhone;
     private long   createdAt;
 
     public EventRequest() {}    // required by Firestore
@@ -32,6 +40,14 @@ public class EventRequest {
     public String getBudgetRange() { return budgetRange; }
     public String getManagerId()   { return managerId; }
     public String getStatus()      { return status; }
+    public String getLocation()    { return location; }
+    public String getGuests()      { return guests; }
+    public String getDescription() { return description; }
+    public String getDuration()    { return duration; }
+    public String getStyle()       { return style; }
+    public String getSpecialRequests() { return specialRequests; }
+    public String getClientEmail() { return clientEmail; }
+    public String getClientPhone() { return clientPhone; }
     public long   getCreatedAt()   { return createdAt; }
 
     // ── Setters ───────────────────────────────────────────────────────────────
@@ -44,6 +60,14 @@ public class EventRequest {
     public void setBudgetRange(String v)           { this.budgetRange = v; }
     public void setManagerId(String v)             { this.managerId = v; }
     public void setStatus(String v)                { this.status = v; }
+    public void setLocation(String v)              { this.location = v; }
+    public void setGuests(String v)                { this.guests = v; }
+    public void setDescription(String v)           { this.description = v; }
+    public void setDuration(String v)              { this.duration = v; }
+    public void setStyle(String v)                 { this.style = v; }
+    public void setSpecialRequests(String v)       { this.specialRequests = v; }
+    public void setClientEmail(String v)           { this.clientEmail = v; }
+    public void setClientPhone(String v)           { this.clientPhone = v; }
     public void setCreatedAt(long v)               { this.createdAt = v; }
 
     // ── Convenience helpers called by EventRequestAdapter ─────────────────────

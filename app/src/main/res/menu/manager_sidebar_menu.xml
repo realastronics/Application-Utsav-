@@ -14,6 +14,16 @@
             android:title="Notifications"/>
 
         <item
+            android:id="@+id/manager_sidebar_requests"
+            android:icon="@drawable/ic_support"
+            android:title="Requests"/>
+
+        <item
+            android:id="@+id/manager_sidebar_insights"
+            android:icon="@drawable/ic_search"
+            android:title="Statistic Insights"/>
+
+        <item
             android:id="@+id/manager_sidebar_events"
             android:icon="@drawable/ic_event"
             android:title="My Events"/>

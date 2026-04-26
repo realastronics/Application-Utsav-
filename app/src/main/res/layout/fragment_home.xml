@@ -45,7 +45,16 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"/>
 
-            <!-- ✅ Added android:id so R.id.btnMenu resolves -->
+            <!-- ✅ Added notification button -->
+            <ImageView
+                android:id="@+id/btnNotifications"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_notifications"
+                android:layout_marginStart="10dp"
+                android:scaleType="fitCenter"
+                app:tint="#9381FF"/>
+
             <ImageView
                 android:id="@+id/btnMenu"
                 android:layout_width="32dp"

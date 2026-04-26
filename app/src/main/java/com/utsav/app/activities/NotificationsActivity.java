@@ -22,19 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Shows all notifications for the logged-in manager.
+ * Shows all notifications for the logged-in user (Host or Manager).
  *
  * Tabs: All | Activity | System
  *
  * Firestore path:  notifications/{notifId}
  *   Fields: recipientUid, type ("activity"|"system"), title, body,
  *           read (boolean), createdAt (long), iconType ("booking"|"message"|"subscription")
- *
- * We also expose a static helper  pushNotification()  so other parts of the
- * app (e.g. when a host accepts a quote) can write a notification document
- * without importing this whole Activity.
  */
-public class ManagerNotificationsActivity extends AppCompatActivity {
+public class NotificationsActivity extends AppCompatActivity {
 
     // ── Tab IDs ───────────────────────────────────────────────────────────────
     private static final int TAB_ALL      = 0;

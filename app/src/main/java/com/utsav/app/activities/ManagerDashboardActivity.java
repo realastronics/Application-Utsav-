@@ -3,6 +3,7 @@ package com.utsav.app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +33,13 @@ public class ManagerDashboardActivity extends AppCompatActivity {
 
     // ── Views ─────────────────────────────────────────────────────────────────
     private DrawerLayout drawerLayout;
-    private TextView tvGreeting;
+    private TextView tvGreeting, tvManagerNameDisplay;
     private TextView tvRevenue;
     private TextView tvActiveBookings;
     private TextView tvPendingCount;
     private RecyclerView rvRequests;
     private RecyclerView rvSchedule;
+    private View dashboardContent, fragmentContainer;
     private View emptyRequests;
     private View emptySchedule;
 
@@ -71,7 +73,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
 
         bindViews();
         setupSidebar();
-        loadManagerName();
+        loadManagerInfo();
         loadStats();
         setupRequestsList();
         setupScheduleList();
@@ -82,6 +84,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     private void bindViews() {
         drawerLayout    = findViewById(R.id.drawerLayout);
         tvGreeting      = findViewById(R.id.tvGreeting);
+        tvManagerNameDisplay = findViewById(R.id.tvManagerNameDisplay);
         tvRevenue       = findViewById(R.id.tvRevenue);
         tvActiveBookings = findViewById(R.id.tvActiveBookings);
         tvPendingCount  = findViewById(R.id.tvPendingCount);
@@ -89,33 +92,78 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         rvSchedule      = findViewById(R.id.rvSchedule);
         emptyRequests   = findViewById(R.id.emptyRequests);
         emptySchedule   = findViewById(R.id.emptySchedule);
+        dashboardContent = findViewById(R.id.dashboard_content);
+        fragmentContainer = findViewById(R.id.fragment_container);
 
         // Hamburger
         findViewById(R.id.btnMenu).setOnClickListener(v ->
                 drawerLayout.openDrawer(GravityCompat.END));
-        findViewById(R.id.btnNotifications).setOnClickListener(v ->
-                startActivity(new Intent(this, ManagerNotificationsActivity.class)));
     }
 
     // -- Bottom navbar
     private void setupBottomNav() {
-        // Dashboard is the current screen — no action
+        View dashboardContent = findViewById(R.id.dashboard_content);
+
         findViewById(R.id.mnav_dashboard).setOnClickListener(v -> {
-            // already here, optionally scroll to top
+            clearFragments();
+            dashboardContent.setVisibility(View.VISIBLE);
+            fragmentContainer.setVisibility(View.GONE);
+            updateNavUI(R.id.mnav_dashboard);
         });
 
         findViewById(R.id.mnav_requests).setOnClickListener(v -> {
-            // scroll to pending requests section — or later a dedicated Activity
-            Toast.makeText(this, "Showing requests", Toast.LENGTH_SHORT).show();
+            showFragment(new com.utsav.app.fragments.RequestFragment());
+            updateNavUI(R.id.mnav_requests);
+        });
+
+        findViewById(R.id.mnav_insights).setOnClickListener(v -> {
+            showFragment(new com.utsav.app.fragments.StatisticInsightsFragment());
+            updateNavUI(R.id.mnav_insights);
         });
 
         findViewById(R.id.mnav_chat).setOnClickListener(v -> {
-            // Manager chat list — wire to a ManagerChatsActivity when Farhan builds it
-            Toast.makeText(this, "Chat coming soon", Toast.LENGTH_SHORT).show();
+            showFragment(new com.utsav.app.fragments.ManagerChatsFragment());
+            updateNavUI(R.id.mnav_chat);
         });
 
         findViewById(R.id.mnav_profile).setOnClickListener(v ->
                 startActivity(new Intent(this, ManagerSelfProfileActivity.class)));
+    }
+
+    private void showFragment(androidx.fragment.app.Fragment fragment) {
+        dashboardContent.setVisibility(View.GONE);
+        fragmentContainer.setVisibility(View.VISIBLE);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+    }
+
+    private void clearFragments() {
+        getSupportFragmentManager().getFragments().forEach(f ->
+                getSupportFragmentManager().beginTransaction().remove(f).commit());
+    }
+
+    private void updateNavUI(int activeId) {
+        int inactiveColor = 0xFFBBBBBB;
+        int activeColor   = 0xFF9381FF;
+
+        // Reset all
+        ((ImageView)findViewById(R.id.mnav_dashboard_icon)).setColorFilter(inactiveColor);
+        ((ImageView)findViewById(R.id.mnav_requests_icon)).setColorFilter(inactiveColor);
+        ((ImageView)findViewById(R.id.mnav_chat_icon)).setColorFilter(inactiveColor);
+        ((ImageView)findViewById(R.id.mnav_profile_icon)).setColorFilter(inactiveColor);
+        ((ImageView)findViewById(R.id.mnav_insights_icon)).setColorFilter(inactiveColor);
+
+        // Set active
+        if (activeId == R.id.mnav_dashboard) {
+            ((ImageView)findViewById(R.id.mnav_dashboard_icon)).setColorFilter(activeColor);
+        } else if (activeId == R.id.mnav_requests) {
+            ((ImageView)findViewById(R.id.mnav_requests_icon)).setColorFilter(activeColor);
+        } else if (activeId == R.id.mnav_insights) {
+            ((ImageView)findViewById(R.id.mnav_insights_icon)).setColorFilter(activeColor);
+        } else if (activeId == R.id.mnav_chat) {
+            ((ImageView)findViewById(R.id.mnav_chat_icon)).setColorFilter(activeColor);
+        }
     }
 
 
@@ -147,7 +195,26 @@ public class ManagerDashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else if (id == R.id.manager_sidebar_notifications) {
-                startActivity(new Intent(this, ManagerNotificationsActivity.class));
+                startActivity(new Intent(this, com.utsav.app.activities.NotificationsActivity.class));
+            }
+            else if (id == R.id.manager_sidebar_requests) {
+                showFragment(new com.utsav.app.fragments.RequestFragment());
+                updateNavUI(R.id.mnav_requests);
+            }
+            else if (id == R.id.manager_sidebar_insights) {
+                findViewById(R.id.dashboard_content).setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new com.utsav.app.fragments.StatisticInsightsFragment())
+                        .commit();
+            }
+            else if (id == R.id.manager_sidebar_events) {
+                findViewById(R.id.dashboard_content).setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new com.utsav.app.fragments.ManagerEventsFragment())
+                        .commit();
+            }
+            else if (id == R.id.manager_sidebar_support) {
+                startActivity(new Intent(this, SupportActivity.class));
             }
             // More sidebar items (Profile, etc) to be wired once those
             // activities are built by Farhan / Mehak.
@@ -156,14 +223,28 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         });
     }
 
-    // ── Greeting ──────────────────────────────────────────────────────────────
-    private void loadManagerName() {
+    public void openSidebar() {
+        if (drawerLayout != null) {
+            drawerLayout.openDrawer(GravityCompat.END);
+        }
+    }
+
+    // ── Manager Info ──────────────────────────────────────────────────────────
+    private void loadManagerInfo() {
+        // Set time-based greeting
+        int hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
+        String greet = "Good Night,";
+        if (hour >= 5 && hour < 12)  greet = "Good Morning,";
+        else if (hour >= 12 && hour < 17) greet = "Good Afternoon,";
+        else if (hour >= 17 && hour < 21) greet = "Good Evening,";
+        tvGreeting.setText(greet);
+
         db.collection(Constants.COLLECTION_USERS).document(managerUid).get()
                 .addOnSuccessListener(doc -> {
                     if (doc.exists()) {
                         String name = doc.getString("name");
                         if (name != null && !name.isEmpty()) {
-                            tvGreeting.setText("Hi " + name.split(" ")[0] + "!");
+                            tvManagerNameDisplay.setText(name);
                         }
                     }
                 });
@@ -202,7 +283,9 @@ public class ManagerDashboardActivity extends AppCompatActivity {
 
                     tvRevenue.setText("INR " + totalRevenue);
                     tvActiveBookings.setText(String.valueOf(activeCount));
-                    tvPendingCount.setText(pendingCount + " pending");
+                    if (tvPendingCount != null) {
+                        tvPendingCount.setText(pendingCount + " pending");
+                    }
                 });
         listeners.add(reg);
     }
@@ -222,8 +305,8 @@ public class ManagerDashboardActivity extends AppCompatActivity {
 
     // ── Pending Requests ──────────────────────────────────────────────────────
     private void setupRequestsList() {
-        rvRequests.setLayoutManager(new LinearLayoutManager(this));
-        requestAdapter = new EventRequestAdapter(requestList, this::onAccept, this::onDecline);
+        rvRequests.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        requestAdapter = new EventRequestAdapter(requestList, this::onAccept, this::onDecline, this::onItemClick);
         rvRequests.setAdapter(requestAdapter);
 
         ListenerRegistration reg = db.collection(Constants.COLLECTION_EVENTS)
@@ -249,23 +332,45 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     }
 
     private void onAccept(EventRequest req) {
-        updateEventStatus(req.getId(), Constants.STATUS_ACCEPTED);
+        updateEventStatus(req, Constants.STATUS_ACCEPTED);
     }
 
     private void onDecline(EventRequest req) {
-        updateEventStatus(req.getId(), Constants.STATUS_REJECTED);
+        updateEventStatus(req, Constants.STATUS_REJECTED);
     }
 
-    private void updateEventStatus(String eventId, String newStatus) {
+    private void onItemClick(EventRequest req) {
+        // Navigate to detail view
+        Intent intent = new Intent(this, com.utsav.app.activities.RequestDetailActivity.class);
+        intent.putExtra("eventId", req.getId());
+        startActivity(intent);
+    }
+
+    private void updateEventStatus(EventRequest req, String newStatus) {
         db.collection(Constants.COLLECTION_EVENTS)
-                .document(eventId)
+                .document(req.getId())
                 .update("status", newStatus)
-                .addOnSuccessListener(unused ->
-                        Toast.makeText(this,
-                                newStatus.equals(Constants.STATUS_ACCEPTED)
-                                        ? "Request accepted ✓"
-                                        : "Request declined",
-                                Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(this,
+                            newStatus.equals(Constants.STATUS_ACCEPTED)
+                                    ? "Request accepted ✓"
+                                    : "Request declined",
+                            Toast.LENGTH_SHORT).show();
+
+                    String title = newStatus.equals(Constants.STATUS_ACCEPTED) ? "Request Accepted! 🎉" : "Request Declined";
+                    String body = "The event '" + req.getTitle() + "' has been " + newStatus;
+
+                    // 1. Notify host
+                    com.utsav.app.activities.NotificationsActivity.pushNotification(
+                            req.getHostUid(), "activity", "booking", title, body);
+
+                    // 2. Notify manager (self)
+                    String managerUid = com.google.firebase.auth.FirebaseAuth.getInstance().getUid();
+                    if (managerUid != null) {
+                        com.utsav.app.activities.NotificationsActivity.pushNotification(
+                                managerUid, "activity", "booking", "Action Confirmed", "You " + newStatus + " the request: " + req.getTitle());
+                    }
+                })
                 .addOnFailureListener(ex ->
                         Toast.makeText(this, "Update failed. Try again.",
                                 Toast.LENGTH_SHORT).show());
@@ -287,14 +392,44 @@ public class ManagerDashboardActivity extends AppCompatActivity {
                 .addSnapshotListener((snapshots, e) -> {
                     if (e != null || snapshots == null) return;
 
-                    scheduleList.clear();
+                    List<ScheduleItem> allAccepted = new ArrayList<>();
                     for (var doc : snapshots.getDocuments()) {
                         ScheduleItem item = doc.toObject(ScheduleItem.class);
                         if (item != null) {
                             item.setId(doc.getId());
-                            scheduleList.add(item);
+                            allAccepted.add(item);
                         }
                     }
+
+                    // Filter and Sort in Java
+                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/dd/yyyy", java.util.Locale.getDefault());
+                    long now = System.currentTimeMillis() - (24 * 60 * 60 * 1000); // Allow today
+
+                    List<ScheduleItem> upcoming = new ArrayList<>();
+                    for (ScheduleItem item : allAccepted) {
+                        try {
+                            java.util.Date d = sdf.parse(item.getDate());
+                            if (d != null && d.getTime() >= now) {
+                                upcoming.add(item);
+                            }
+                        } catch (Exception ignored) {}
+                    }
+
+                    // Sort by date ascending
+                    java.util.Collections.sort(upcoming, (a, b) -> {
+                        try {
+                            java.util.Date da = sdf.parse(a.getDate());
+                            java.util.Date db = sdf.parse(b.getDate());
+                            return da.compareTo(db);
+                        } catch (Exception ex) { return 0; }
+                    });
+
+                    scheduleList.clear();
+                    // Take only 3
+                    for (int i = 0; i < Math.min(3, upcoming.size()); i++) {
+                        scheduleList.add(upcoming.get(i));
+                    }
+
                     scheduleAdapter.notifyDataSetChanged();
                     emptySchedule.setVisibility(scheduleList.isEmpty() ? View.VISIBLE : View.GONE);
                     rvSchedule.setVisibility(scheduleList.isEmpty() ? View.GONE : View.VISIBLE);
@@ -345,10 +480,9 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /** Returns the name stored in tvGreeting, stripped of "Hi " prefix. */
+    /** Returns the name stored in Firestore or a fallback. */
     private String getCurrentManagerName() {
-        String raw = tvGreeting.getText().toString(); // "Hi Farhan!"
-        return raw.startsWith("Hi ") ? raw.substring(3, raw.length() - 1) : raw;
+        return "Manager"; // Fallback, could be fetched from a variable
     }
 
     // ── Back / drawer ─────────────────────────────────────────────────────────
@@ -356,6 +490,11 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
             drawerLayout.closeDrawer(GravityCompat.END);
+        } else if (findViewById(R.id.dashboard_content).getVisibility() == View.GONE) {
+            // Return to dashboard if a fragment is showing
+            clearFragments();
+            findViewById(R.id.dashboard_content).setVisibility(View.VISIBLE);
+            updateNavUI(R.id.mnav_dashboard);
         } else {
             super.onBackPressed();
         }

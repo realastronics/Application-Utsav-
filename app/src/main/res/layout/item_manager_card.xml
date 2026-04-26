@@ -139,6 +139,21 @@
                 android:fontFamily="@font/dm_sans"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHire"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Hire"
+                android:textSize="12sp"
+                android:textColor="#9381FF"
+                android:fontFamily="@font/dm_sans"
+                app:cornerRadius="20dp"
+                app:strokeColor="#9381FF"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnChat"
                 android:layout_width="wrap_content"
                 android:layout_height="34dp"

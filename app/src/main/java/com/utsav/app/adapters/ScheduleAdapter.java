@@ -3,12 +3,12 @@ package com.utsav.app.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
 import com.utsav.app.R;
 import com.utsav.app.models.ScheduleItem;
 
@@ -39,7 +39,24 @@ public class ScheduleAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ScheduleItem item = items.get(position);
         holder.tvTitle.setText(item.getDisplayTitle());
-        holder.tvLocationDate.setText(item.getLocationDateLabel());
+        holder.tvLocation.setText(item.getLocation() != null ? item.getLocation() : "TBD");
+        
+        // Date Badge logic: Convert MM/dd/yyyy to something like "18 May"
+        String rawDate = item.getDate();
+        if (rawDate != null && rawDate.contains("/")) {
+            try {
+                String[] parts = rawDate.split("/");
+                int monthIdx = Integer.parseInt(parts[0]) - 1;
+                String day = parts[1];
+                String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+                holder.tvDateBadge.setText(day + " " + months[monthIdx]);
+            } catch (Exception e) {
+                holder.tvDateBadge.setText(rawDate);
+            }
+        } else {
+            holder.tvDateBadge.setText(rawDate != null ? rawDate : "—");
+        }
+
         holder.btnChat.setOnClickListener(v -> listener.onChat(item));
     }
 
@@ -47,14 +64,16 @@ public class ScheduleAdapter extends
     public int getItemCount() { return items.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView       tvTitle, tvLocationDate;
-        MaterialButton btnChat;
+        TextView  tvTitle, tvLocation, tvDateBadge, tvTime;
+        ImageView btnChat;
 
         ViewHolder(View v) {
             super(v);
-            tvTitle        = v.findViewById(R.id.tvScheduleTitle);
-            tvLocationDate = v.findViewById(R.id.tvScheduleLocation);
-            btnChat        = v.findViewById(R.id.btnScheduleChat);
+            tvTitle     = v.findViewById(R.id.tvScheduleTitle);
+            tvLocation  = v.findViewById(R.id.tvScheduleLocation);
+            tvDateBadge = v.findViewById(R.id.tvScheduleDateBadge);
+            tvTime      = v.findViewById(R.id.tvScheduleTime);
+            btnChat     = v.findViewById(R.id.btnScheduleChat);
         }
     }
 }
