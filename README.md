@@ -110,8 +110,7 @@ git clone https://github.com/your-org/utsav.git
 
 # Let Gradle sync, then run on emulator or device
 ```
-
-No API keys or external services are required to run the current build. All data is served locally via `DataProvider.java`.
+All data for manager, users and chats is stored in firestore. Chat workflow is working.
 ---
 
 ## Branch Strategy
