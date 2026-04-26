@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Utsav"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Utsav"
-        tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/Theme.Utsav">
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <!-- ENTRY POINT — must always be SplashActivity -->
+        <activity android:name=".SplashActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Auth flow -->
+        <activity android:name=".AuthActivity"        android:exported="false"/>
+        <activity android:name=".SelectActorActivity" android:exported="false"/>
+        <activity android:name=".MainActivity"                     android:exported="false"/>
+
+        <activity android:name=".activities.ManagerListActivity"   android:exported="false"/>
+        <activity android:name=".ChatActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+
+        <!-- ManagerActivities -->
+        <activity android:name=".activities.ManagerDashboardActivity" android:exported="false"/>
+        <activity android:name=".activities.ManagerNotificationsActivity" />
+
     </application>
 
 </manifest>

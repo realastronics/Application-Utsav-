@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- TOP ROW: image + info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Manager Photo -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgManager"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/img_manish"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#9381FF"/>
+
+            <!-- Info column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <!-- Name + icons row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvManagerName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mitali"
+                        android:textSize="16sp"
+                        android:textColor="#111111"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/imgSaved"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_saved"
+                        app:tint="#9381FF" />
+
+                </LinearLayout>
+
+                <!-- Manager type -->
+                <TextView
+                    android:id="@+id/tvManagerType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wedding Manager"
+                    android:textSize="12sp"
+                    android:textColor="#9381FF"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_marginTop="2dp"/>
+
+                <!-- Description -->
+                <TextView
+                    android:id="@+id/tvManagerDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hosted the grand events.\nHas done management from Mumbai"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_marginTop="4dp"
+                    android:lineSpacingMultiplier="1.4"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- BOTTOM ROW: rating + phone + chat -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star"/>
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textSize="13sp"
+                android:textColor="#444444"
+                android:fontFamily="@font/dm_sans"
+                android:layout_marginStart="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" | "
+                android:textColor="#CCCCCC"/>
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="9213584832"
+                android:textSize="13sp"
+                android:textColor="#444444"
+                android:fontFamily="@font/dm_sans"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChat"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Chat"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/dm_sans"
+                app:backgroundTint="#9381FF"
+                app:cornerRadius="20dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

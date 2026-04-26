@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ManagerListActivity is a standalone Activity (not a fragment inside
+    MainActivity), so it needs its own DrawerLayout + NavigationView to
+    support the sidebar.  The hamburger ImageView now has an android:id
+    so ManagerListActivity can attach a click listener to it.
+-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ── Main content ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+
+        <!-- TOP BAR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Utsav"
+                android:textSize="26sp"
+                android:textColor="#9381FF"
+                android:fontFamily="@font/poppins_bold"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Events"
+                android:textSize="13sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/dm_sans"
+                app:backgroundTint="#9381FF"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_search"
+                app:iconTint="#FFFFFF"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"/>
+
+            <!-- ✅ Added android:id so the Activity can wire this -->
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_menu"
+                android:layout_marginStart="10dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Open menu"/>
+
+        </LinearLayout>
+
+        <!-- PURPLE HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#EEF0FF"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find your best Manager"
+                android:textSize="22sp"
+                android:textColor="#111111"
+                android:fontFamily="@font/poppins_bold"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Browse top-rated event managers"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:fontFamily="@font/dm_sans"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- SEARCH BAR -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_input_field"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_search"
+                    android:layout_marginEnd="8dp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Search Manager"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/dm_sans"
+                    android:background="@null"
+                    android:inputType="text"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- BEST MANAGERS TITLE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Best Managers"
+                android:textSize="16sp"
+                android:textColor="#111111"
+                android:fontFamily="@font/poppins_semibold"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_navigate"
+                android:layout_marginStart="6dp"/>
+
+        </LinearLayout>
+
+        <!-- MANAGER LIST -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvManagers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"/>
+
+    </LinearLayout>
+
+    <!-- ── Sliding sidebar — same menu as MainActivity ── -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/sidebar_menu"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

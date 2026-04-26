@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/sidebar_profile"
+            android:icon="@drawable/ic_person"
+            android:title="My Profile"/>
+
+        <item
+            android:id="@+id/sidebar_theme"
+            android:icon="@drawable/ic_dark_mode"
+            android:title="Change Theme: Dark"/>
+
+        <item
+            android:id="@+id/sidebar_notifications"
+            android:icon="@drawable/ic_notifications"
+            android:title="Notifications"/>
+
+        <item
+            android:id="@+id/sidebar_events"
+            android:icon="@drawable/ic_event"
+            android:title="My Events"/>
+
+        <item
+            android:id="@+id/sidebar_support"
+            android:icon="@drawable/ic_support"
+            android:title="Contact Support"/>
+
+        <item
+            android:id="@+id/sidebar_create_event"
+            android:icon="@drawable/ic_create"
+            android:title="Event Create"/>
+
+        <item
+            android:id="@+id/sidebar_saved"
+            android:icon="@drawable/ic_bookmark"
+            android:title="Saved Managers"/>
+
+    </group>
+
+    <item
+        android:id="@+id/sidebar_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout"/>
+
+</menu>

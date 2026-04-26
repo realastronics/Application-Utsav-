@@ -1,9 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Utsav" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Utsav"
+        parent="Theme.MaterialComponents.Light.NoActionBar">
     </style>
-
-    <style name="Theme.Utsav" parent="Base.Theme.Utsav" />
+    <style name="UtsavDatePickerDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#9381FF</item>
+        <item name="colorPrimary">#9381FF</item>
+        <item name="colorPrimaryDark">#7C5CBF</item>
+    </style>
 </resources>
