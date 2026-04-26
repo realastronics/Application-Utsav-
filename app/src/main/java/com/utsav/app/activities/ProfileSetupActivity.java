@@ -87,7 +87,6 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
     // ── Save ──────────────────────────────────────────────────────────────────
     private void saveProfile() {
-        // Collect event types
         List<String> eventTypes = new ArrayList<>();
         if (cbWedding.isChecked())    eventTypes.add("Wedding");
         if (cbCorporate.isChecked())  eventTypes.add("Corporate");
@@ -96,40 +95,77 @@ public class ProfileSetupActivity extends AppCompatActivity {
         if (cbConference.isChecked()) eventTypes.add("Conference");
         if (cbPrivate.isChecked())    eventTypes.add("Private Party");
 
-        // Collect portfolio URLs (filter empties)
         List<String> portfolioUrls = new ArrayList<>();
         for (String url : Arrays.asList(
                 text(etPortfolio1), text(etPortfolio2), text(etPortfolio3))) {
             if (!url.isEmpty()) portfolioUrls.add(url);
         }
 
-        // Social links map
         Map<String, String> socials = new HashMap<>();
         socials.put("instagram", text(etInstagram));
         socials.put("linkedin",  text(etLinkedin));
         socials.put("website",   text(etWebsite));
 
-        // Merge everything into the users/{uid} document
         Map<String, Object> profileData = new HashMap<>();
-        profileData.put("bio",          text(etBio));
-        profileData.put("location",     text(etLocation));
-        profileData.put("phone",        text(etPhone));
-        profileData.put("eventTypes",   eventTypes);
-        profileData.put("portfolioUrls", portfolioUrls);
-        profileData.put("socials",      socials);
+        profileData.put("bio",             text(etBio));
+        profileData.put("location",        text(etLocation));
+        profileData.put("phone",           text(etPhone));
+        profileData.put("eventTypes",      eventTypes);
+        profileData.put("portfolioUrls",   portfolioUrls);
+        profileData.put("socials",         socials);
         profileData.put("profileComplete", true);
 
         setLoading(true);
 
+        // ── Step 1: update users/{uid} with profile fields ───────────────────
         db.collection(Constants.COLLECTION_USERS)
                 .document(uid)
                 .update(profileData)
                 .addOnSuccessListener(unused -> {
-                    setLoading(false);
-                    Toast.makeText(this,
-                            "Profile saved! Welcome to Utsav 🎉",
-                            Toast.LENGTH_SHORT).show();
-                    goToDashboard();
+
+                    // ── Step 2: read the name that was saved at registration ──
+                    db.collection(Constants.COLLECTION_USERS)
+                            .document(uid)
+                            .get()
+                            .addOnSuccessListener(userDoc -> {
+                                // Safely read name — falls back to empty string
+                                String name = userDoc.getString("name");
+                                if (name == null) name = "";
+
+                                // ── Step 3: write to managers collection ──────
+                                final String finalName = name;
+                                final List<String> finalEventTypes    = eventTypes;
+                                final List<String> finalPortfolioUrls = portfolioUrls;
+
+                                Map<String, Object> managerDoc = new HashMap<>();
+                                managerDoc.put("id",            uid);
+                                managerDoc.put("name",          finalName);
+                                managerDoc.put("bio",           text(etBio));
+                                managerDoc.put("location",      text(etLocation));
+                                managerDoc.put("phone",         text(etPhone));
+                                managerDoc.put("eventTypes",    finalEventTypes);
+                                managerDoc.put("portfolioUrls", finalPortfolioUrls);
+                                managerDoc.put("rating",        0.0f);
+                                managerDoc.put("reviewCount",   0);
+                                managerDoc.put("isAvailable",   true);
+
+                                db.collection("managers")
+                                        .document(uid)
+                                        .set(managerDoc)
+                                        .addOnSuccessListener(r -> {
+                                            setLoading(false);
+                                            Toast.makeText(ProfileSetupActivity.this,
+                                                    "Profile saved! Welcome to Utsav 🎉",
+                                                    Toast.LENGTH_SHORT).show();
+                                            goToDashboard();
+                                        })
+                                        .addOnFailureListener(ex -> {
+                                            setLoading(false);
+                                            Toast.makeText(ProfileSetupActivity.this,
+                                                    "Couldn't save manager profile.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        });
+                            });
                 })
                 .addOnFailureListener(e -> {
                     setLoading(false);

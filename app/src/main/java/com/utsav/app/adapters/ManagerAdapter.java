@@ -149,6 +149,27 @@ public class ManagerAdapter extends
         String managerName = manager.getName();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        db.collection(Constants.COLLECTION_USERS).document(hostUid).get()
+                .addOnSuccessListener(userDoc -> {
+                    String hostName = userDoc.getString("name");
+
+                    Map<String, Object> chat = new HashMap<>();
+                    chat.put("hostUid",       hostUid);
+                    chat.put("managerId",     managerId);   // now a real Firebase UID
+                    chat.put("managerName",   managerName);
+                    chat.put("hostName",      hostName != null ? hostName : "Host");
+                    chat.put("lastMessage",   "");
+                    chat.put("lastTimestamp", System.currentTimeMillis());
+
+                    db.collection(Constants.COLLECTION_CHATS).add(chat)
+                            .addOnSuccessListener(ref ->
+                                    navigateToChat(context, ref.getId(), managerName))
+                            .addOnFailureListener(ex ->
+                                    Toast.makeText(context,
+                                            "Could not start chat. Try again.",
+                                            Toast.LENGTH_SHORT).show());
+                });
+
         db.collection(Constants.COLLECTION_CHATS)
                 .whereEqualTo("hostUid",   hostUid)
                 .whereEqualTo("managerId", managerId)

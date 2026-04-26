@@ -18,7 +18,11 @@ import com.utsav.app.AuthActivity;
 import com.utsav.app.R;
 import com.utsav.app.adapters.ManagerAdapter;
 import com.utsav.app.fragments.ProfileFragment;
+import com.utsav.app.models.Manager;
 import com.utsav.app.utils.DataProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManagerListActivity extends AppCompatActivity {
 
@@ -64,7 +68,31 @@ public class ManagerListActivity extends AppCompatActivity {
         // ── Manager list ──────────────────────────────────────────────────────
         RecyclerView rv = findViewById(R.id.rvManagers);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new ManagerAdapter(DataProvider.getManagers()));
+        rv.loadManagers(new ManagerAdapter(DataProvider.getManagers()));
+    }
+
+    // In ManagerListActivity.java, replace the rv.setAdapter line and add this method:
+
+    private void loadManagers(RecyclerView rv) {
+        List<Manager> managerList = new ArrayList<>();
+        ManagerAdapter managerAdapter = new ManagerAdapter(managerList);
+        rv.setAdapter(managerAdapter);
+
+        FirebaseFirestore.getInstance()
+                .collection("managers")
+                .whereEqualTo("isAvailable", true)
+                .addSnapshotListener((snapshots, e) -> {
+                    if (e != null || snapshots == null) return;
+                    managerList.clear();
+                    for (var doc : snapshots.getDocuments()) {
+                        Manager m = doc.toObject(Manager.class);
+                        if (m != null) {
+                            m.setId(doc.getId());  // real Firebase UID
+                            managerList.add(m);
+                        }
+                    }
+                    managerAdapter.notifyDataSetChanged();
+                });
     }
 
     private void populateSidebarHeader(NavigationView navView) {
