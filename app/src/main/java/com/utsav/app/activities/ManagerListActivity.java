@@ -68,7 +68,7 @@ public class ManagerListActivity extends AppCompatActivity {
         // ── Manager list ──────────────────────────────────────────────────────
         RecyclerView rv = findViewById(R.id.rvManagers);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.loadManagers(new ManagerAdapter(DataProvider.getManagers()));
+        loadManagers(rv);
     }
 
     // In ManagerListActivity.java, replace the rv.setAdapter line and add this method:
