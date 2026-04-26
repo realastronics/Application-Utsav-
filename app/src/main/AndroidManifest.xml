@@ -29,6 +29,7 @@
 
         <!-- ManagerActivities -->
         <activity android:name=".activities.ManagerDashboardActivity" android:exported="false"/>
+        <activity android:name=".activities.ManagerNotificationsActivity" />
 
     </application>
 

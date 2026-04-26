@@ -1,6 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8F6FF">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- ── TOP BAR ──────────────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp">
+
+        <!-- Back arrow -->
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#1A1A2E"
+            android:contentDescription="Back"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:text="Notifications"
+            android:textSize="18sp"
+            android:textColor="#1A1A2E"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"/>
+
+        <!-- Mark all read -->
+        <ImageButton
+            android:id="@+id/btnMarkAllRead"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_check_all"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#9381FF"
+            android:contentDescription="Mark all as read"/>
+
+    </LinearLayout>
+
+    <!-- ── TABS: All | Activity | System ────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/tvTabAll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="All"
+            android:textSize="14sp"
+            android:textColor="#9381FF"
+            android:textStyle="bold"
+            android:fontFamily="@font/dm_sans"
+            android:paddingEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/tvTabActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Activity"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:fontFamily="@font/dm_sans"
+            android:paddingEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/tvTabSystem"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="System"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:fontFamily="@font/dm_sans"/>
+
+    </LinearLayout>
+
+    <!-- Thin divider under tabs -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"/>
+
+    <!-- ── NOTIFICATION LIST ─────────────────────────────────────────────────── -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"/>
+
+    <!-- Empty state -->
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔔"
+            android:textSize="48sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="No notifications yet"
+            android:textSize="16sp"
+            android:textColor="#1A1A2E"
+            android:fontFamily="@font/poppins_semibold"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="You'll see booking confirmations,\nmessages and system alerts here."
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:fontFamily="@font/dm_sans"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

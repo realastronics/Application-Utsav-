@@ -57,6 +57,13 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startActivity(new Intent(this, AuthActivity.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_manager_dashboard);
 
         db         = FirebaseFirestore.getInstance();
@@ -85,6 +92,8 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         // Hamburger
         findViewById(R.id.btnMenu).setOnClickListener(v ->
                 drawerLayout.openDrawer(GravityCompat.END));
+        findViewById(R.id.btnNotifications).setOnClickListener(v ->
+                startActivity(new Intent(this, ManagerNotificationsActivity.class)));
     }
 
     // ── Sidebar ───────────────────────────────────────────────────────────────
@@ -114,7 +123,10 @@ public class ManagerDashboardActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
-            // More sidebar items (Notifications, Profile) to be wired once those
+            else if (id == R.id.sidebar_notifications) {
+                startActivity(new Intent(this, ManagerNotificationsActivity.class));
+            }
+            // More sidebar items (Profile, etc) to be wired once those
             // activities are built by Farhan / Mehak.
             drawerLayout.closeDrawer(GravityCompat.END);
             return true;
