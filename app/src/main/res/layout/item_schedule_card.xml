@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <!-- Event Image (Left) -->
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgScheduleThumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F5F5FF"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_featured"
+                app:shapeAppearanceOverlay="@style/CircleShapeOverlay" />
+
+            <TextView
+                android:id="@+id/tvScheduleDateBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/bg_chat_btn"
+                android:backgroundTint="#9381FF"
+                android:elevation="4dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:text="24 May"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <!-- Event info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvScheduleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Yacht Soiree"
+                android:textColor="#111111"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvScheduleLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/dm_sans"
+                android:maxLines="1"
+                android:text="North Dock, Mumbai"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvScheduleTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="06:30 PM - 10:30 PM"
+                android:textColor="#9381FF"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Chat button -->
+        <ImageView
+            android:id="@+id/btnScheduleChat"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_avatar_circle"
+            android:backgroundTint="#F0EEFF"
+            android:padding="8dp"
+            android:src="@drawable/ic_chat"
+            app:tint="#9381FF" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

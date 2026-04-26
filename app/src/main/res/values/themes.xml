@@ -8,4 +8,7 @@
         <item name="colorPrimary">#9381FF</item>
         <item name="colorPrimaryDark">#7C5CBF</item>
     </style>
+    <style name="CircleShapeOverlay" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

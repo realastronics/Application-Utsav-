@@ -50,6 +50,7 @@ public class CreateEventFragment extends Fragment {
     // ── State ────────────────────────────────────────────────────────────────
     private String selectedEventType = "";   // one of Corporate / Wedding / Birthday / Concert
     private final List<MaterialButton> typeButtons = new ArrayList<>();
+    private String targetedManagerId = null; // if sent from Manager profile
 
     // ── Budget options ───────────────────────────────────────────────────────
     private static final String[] BUDGET_OPTIONS = {
@@ -77,10 +78,19 @@ public class CreateEventFragment extends Fragment {
         bindViews(view);
         setupHamburger(view);
         setupEventTypeToggle();
-        setupDatePicker();
-        setupTimePicker();
+        setupDatePicker(view);
+        setupTimePicker(view);
         setupBudgetDropdown();
         setupSubmit();
+        
+        // Check for targeted manager from arguments
+        if (getArguments() != null) {
+            targetedManagerId = getArguments().getString("managerId");
+            if (targetedManagerId != null) {
+                rbInviteOnly.setChecked(true);
+                rbPublic.setEnabled(false); // Force direct request
+            }
+        }
     }
 
     // ── Bind ─────────────────────────────────────────────────────────────────
@@ -153,43 +163,45 @@ public class CreateEventFragment extends Fragment {
     }
 
     // ── Date Picker ───────────────────────────────────────────────────────────
-    private void setupDatePicker() {
-        etDate.setOnClickListener(v -> {
-            Calendar cal = Calendar.getInstance();
-            new DatePickerDialog(
-                    requireContext(),
-                    R.style.UtsavDatePickerDialog,
-                    (dp, year, month, day) ->
-                            etDate.setText(String.format(Locale.getDefault(),
-                                    "%02d/%02d/%04d", month + 1, day, year)),
-                    cal.get(Calendar.YEAR),
-                    cal.get(Calendar.MONTH),
-                    cal.get(Calendar.DAY_OF_MONTH)
-            ).show();
-        });
+    private void setupDatePicker(View view) {
+        etDate.setOnClickListener(v -> showDatePicker());
+        // Also trigger on Til click
+        view.findViewById(R.id.til_event_date).setOnClickListener(v -> showDatePicker());
+    }
 
-        // Also trigger on end-icon tap
-        view_til_click(R.id.til_event_date, etDate);
+    private void showDatePicker() {
+        Calendar cal = Calendar.getInstance();
+        new DatePickerDialog(
+                requireContext(),
+                (dp, year, month, day) ->
+                        etDate.setText(String.format(Locale.getDefault(),
+                                "%02d/%02d/%04d", month + 1, day, year)),
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+        ).show();
     }
 
     // ── Time Picker ───────────────────────────────────────────────────────────
-    private void setupTimePicker() {
-        etTime.setOnClickListener(v -> {
-            Calendar cal = Calendar.getInstance();
-            new TimePickerDialog(
-                    requireContext(),
-                    R.style.UtsavDatePickerDialog,
-                    (tp, hour, minute) -> {
-                        String ampm = hour >= 12 ? "PM" : "AM";
-                        int h12 = hour % 12 == 0 ? 12 : hour % 12;
-                        etTime.setText(String.format(Locale.getDefault(),
-                                "%02d:%02d %s", h12, minute, ampm));
-                    },
-                    cal.get(Calendar.HOUR_OF_DAY),
-                    cal.get(Calendar.MINUTE),
-                    false
-            ).show();
-        });
+    private void setupTimePicker(View view) {
+        etTime.setOnClickListener(v -> showTimePicker());
+        view.findViewById(R.id.til_event_time).setOnClickListener(v -> showTimePicker());
+    }
+
+    private void showTimePicker() {
+        Calendar cal = Calendar.getInstance();
+        new TimePickerDialog(
+                requireContext(),
+                (tp, hour, minute) -> {
+                    String ampm = hour >= 12 ? "PM" : "AM";
+                    int h12 = hour % 12 == 0 ? 12 : hour % 12;
+                    etTime.setText(String.format(Locale.getDefault(),
+                            "%02d:%02d %s", h12, minute, ampm));
+                },
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                false
+        ).show();
     }
 
     // Helper — makes the TextInputLayout end-icon also open the picker
@@ -298,6 +310,13 @@ public class CreateEventFragment extends Fragment {
         eventData.put("visibility",   visibility);
         eventData.put("status",       Constants.STATUS_PENDING);
         eventData.put("createdAt",    System.currentTimeMillis());
+        
+        // If it was a direct request to a manager
+        if (targetedManagerId != null) {
+            eventData.put("managerId", targetedManagerId);
+        } else {
+            eventData.put("managerId", "public");
+        }
 
         FirebaseFirestore.getInstance()
                 .collection(Constants.COLLECTION_EVENTS)
@@ -307,6 +326,18 @@ public class CreateEventFragment extends Fragment {
                     Toast.makeText(getContext(),
                             "Event posted successfully! 🎉",
                             Toast.LENGTH_LONG).show();
+                    
+                    // Push notification to manager if targeted
+                    if (targetedManagerId != null) {
+                        com.utsav.app.activities.NotificationsActivity.pushNotification(
+                            targetedManagerId,
+                            "activity",
+                            "booking",
+                            "New Event Request!",
+                            "You have received a new request for " + text(etTitle)
+                        );
+                    }
+                    
                     clearForm();
                 })
                 .addOnFailureListener(e -> {

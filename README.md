@@ -148,9 +148,9 @@ main                    ← stable, reviewed code only
 
 - [x] Phase 0 — Idea, scope, and feature definition
 - [x] Phase 1 — Figma UI design and full prototype
-- [ ] Phase 2 — Android implementation (current)
-- [ ] Phase 3 — Firebase Auth + Firestore integration
-- [ ] Phase 4 — Real-time chat via Firebase
+- [x] Phase 2 — Android implementation (current)
+- [x] Phase 3 — Firebase Auth + Firestore integration
+- [x] Phase 4 — Real-time chat via Firebase
 - [ ] Phase 5 — Location-based manager sorting
 - [ ] Phase 6 — Premium stats dashboard + monetisation layer
 

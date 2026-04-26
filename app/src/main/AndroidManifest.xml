@@ -12,8 +12,7 @@
         android:theme="@style/Theme.Utsav">
 
         <!-- ENTRY POINT — must always be SplashActivity -->
-        <activity
-            android:name=".SplashActivity" android:exported="true">
+        <activity android:name=".SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -24,10 +23,17 @@
         <activity android:name=".AuthActivity"        android:exported="false"/>
         <activity android:name=".SelectActorActivity" android:exported="false"/>
         <activity android:name=".MainActivity"                     android:exported="false"/>
-        <activity android:name=".activities.ManagerListActivity"   android:exported="false"/>
 
-        <activity
-            android:name=".ChatActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activities.ManagerListActivity"   android:exported="false"/>
+        <activity android:name=".ChatActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+
+        <!-- ManagerActivities -->
+        <activity android:name=".activities.ManagerDashboardActivity" android:exported="false"/>
+        <activity android:name=".activities.NotificationsActivity" />
+        <activity android:name=".activities.ProfileSetupActivity"    android:exported="false"/>
+        <activity android:name=".activities.ManagerSelfProfileActivity" android:exported="false"/>
+        <activity android:name=".activities.RequestDetailActivity"     android:exported="false"/>
+        <activity android:name=".activities.SupportActivity"           android:exported="false"/>
 
     </application>
 

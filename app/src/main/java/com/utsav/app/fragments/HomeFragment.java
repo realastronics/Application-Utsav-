@@ -64,6 +64,12 @@ public class HomeFragment extends Fragment {
         tvGreeting   = view.findViewById(R.id.tvGreeting);
         rvCategories = view.findViewById(R.id.rvCategories);
 
+        // Notifications
+        view.findViewById(R.id.btnNotifications)
+                .setOnClickListener(v ->
+                        startActivity(new Intent(requireContext(),
+                                com.utsav.app.activities.NotificationsActivity.class)));
+
         // Wire up hamburger → open sidebar in parent MainActivity
         view.findViewById(R.id.btnMenu)
                 .setOnClickListener(v -> {

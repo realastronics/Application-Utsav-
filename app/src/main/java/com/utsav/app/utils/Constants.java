@@ -32,5 +32,7 @@ public class Constants {
     public static final String STATUS_REJECTED  = "rejected";
     public static final String STATUS_COMPLETED = "completed";
 
+    public static final String COLLECTION_NOTIFICATIONS = "notifications";
+
     private Constants() {}  // prevent instantiation
 }

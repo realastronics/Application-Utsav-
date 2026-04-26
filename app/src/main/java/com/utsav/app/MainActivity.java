@@ -20,6 +20,7 @@ import com.utsav.app.fragments.EventsFragment;
 import com.utsav.app.fragments.HomeFragment;
 import com.utsav.app.fragments.ProfileFragment;
 import com.utsav.app.fragments.SavedManagersFragment;
+import com.utsav.app.fragments.UserEventsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,8 +39,39 @@ public class MainActivity extends AppCompatActivity {
         setupSidebar();
         populateSidebarHeader();
 
-        // Default tab on launch
-        loadFragment(new HomeFragment());
+        // Check for navigation extras
+        handleIntentExtras(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(android.content.Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntentExtras(intent);
+    }
+
+    private void handleIntentExtras(android.content.Intent intent) {
+        if (intent == null) {
+            loadFragment(new HomeFragment());
+            return;
+        }
+
+        String target = intent.getStringExtra("targetFragment");
+        String managerId = intent.getStringExtra("managerId");
+
+        if ("create".equals(target)) {
+            CreateEventFragment fragment = new CreateEventFragment();
+            if (managerId != null) {
+                Bundle args = new Bundle();
+                args.putString("managerId", managerId);
+                fragment.setArguments(args);
+            }
+            loadFragment(fragment);
+            // Sync bottom nav UI
+            ((BottomNavigationView)findViewById(R.id.bottomNav)).setSelectedItemId(R.id.nav_create);
+        } else {
+            loadFragment(new HomeFragment());
+        }
     }
 
     // ── Bottom navigation ─────────────────────────────────────────────────────
@@ -84,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new ProfileFragment());
 
             } else if (id == R.id.sidebar_events) {
-                loadFragment(new EventsFragment());
+                loadFragment(new UserEventsFragment());
 
             } else if (id == R.id.sidebar_create_event) {
                 loadFragment(new CreateEventFragment());
