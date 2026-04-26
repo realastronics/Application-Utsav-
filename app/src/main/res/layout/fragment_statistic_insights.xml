@@ -32,7 +32,6 @@
             android:layout_height="28dp"
             android:src="@drawable/ic_menu"
             android:scaleType="fitCenter"
-            app:tint="#333333"
             android:contentDescription="Menu"/>
     </LinearLayout>
 
@@ -85,39 +84,39 @@
                     <!-- Revenue KPI -->
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
+                        android:background="#313178"
                         android:orientation="vertical"
-                        android:background="#9381FF"
-                        android:padding="14dp"
-                        android:layout_marginEnd="8dp">
+                        android:padding="14dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
                             android:text="Total Revenue"
                             android:textColor="#E8DEFF"
-                            android:textSize="11sp"
-                            android:fontFamily="@font/dm_sans"/>
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tvTotalRevenue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="INR 0"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/poppins_bold"
-                            android:layout_marginTop="4dp"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/dm_sans"
                             android:text="Lifetime"
                             android:textColor="#C8BEFF"
-                            android:textSize="10sp"
-                            android:fontFamily="@font/dm_sans"/>
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <!-- Bookings KPI -->
@@ -126,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:background="#9381FF"
+                        android:background="#313178"
                         android:padding="14dp">
 
                         <TextView
@@ -259,7 +258,7 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="30dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
