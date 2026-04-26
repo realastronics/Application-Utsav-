@@ -6,10 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="#F8F6FF">
 
         <LinearLayout
@@ -280,6 +285,106 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+        <!-- ── MANAGER BOTTOM NAV ──────────────────────────────────── -->
+        <LinearLayout
+            android:id="@+id/managerBottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            android:elevation="8dp">
+
+            <LinearLayout
+                android:id="@+id/mnav_dashboard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_home"
+                    app:tint="#9381FF"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home"
+                    android:textSize="10sp"
+                    android:textColor="#9381FF"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mnav_requests"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_event"
+                    app:tint="#BBBBBB"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Requests"
+                    android:textSize="10sp"
+                    android:textColor="#BBBBBB"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mnav_chat"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_chat"
+                    app:tint="#BBBBBB"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chat"
+                    android:textSize="10sp"
+                    android:textColor="#BBBBBB"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mnav_profile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_person"
+                    app:tint="#BBBBBB"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile"
+                    android:textSize="10sp"
+                    android:textColor="#BBBBBB"
+                    android:fontFamily="@font/dm_sans"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- ═══════════════════════ SIDEBAR ════════════════════════════ -->
     <com.google.android.material.navigation.NavigationView

@@ -75,6 +75,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         loadStats();
         setupRequestsList();
         setupScheduleList();
+        setupBottomNav();
     }
 
     // ── Bind ──────────────────────────────────────────────────────────────────
@@ -95,6 +96,28 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         findViewById(R.id.btnNotifications).setOnClickListener(v ->
                 startActivity(new Intent(this, ManagerNotificationsActivity.class)));
     }
+
+    // -- Bottom navbar
+    private void setupBottomNav() {
+        // Dashboard is the current screen — no action
+        findViewById(R.id.mnav_dashboard).setOnClickListener(v -> {
+            // already here, optionally scroll to top
+        });
+
+        findViewById(R.id.mnav_requests).setOnClickListener(v -> {
+            // scroll to pending requests section — or later a dedicated Activity
+            Toast.makeText(this, "Showing requests", Toast.LENGTH_SHORT).show();
+        });
+
+        findViewById(R.id.mnav_chat).setOnClickListener(v -> {
+            // Manager chat list — wire to a ManagerChatsActivity when Farhan builds it
+            Toast.makeText(this, "Chat coming soon", Toast.LENGTH_SHORT).show();
+        });
+
+        findViewById(R.id.mnav_profile).setOnClickListener(v ->
+                startActivity(new Intent(this, ManagerSelfProfileActivity.class)));
+    }
+
 
     // ── Sidebar ───────────────────────────────────────────────────────────────
     private void setupSidebar() {
@@ -123,7 +146,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
-            else if (id == R.id.sidebar_notifications) {
+            else if (id == R.id.manager_sidebar_notifications) {
                 startActivity(new Intent(this, ManagerNotificationsActivity.class));
             }
             // More sidebar items (Profile, etc) to be wired once those
