@@ -90,7 +90,6 @@ app/src/main/
 | `User.java` | Host profile data |
 
 > **Rule:** `models/` and `utils/` are shared contracts. Neither team modifies them without a group discussion first.
-
 ---
 
 ## Getting Started
@@ -114,7 +113,6 @@ git clone https://github.com/your-org/utsav.git
 ```
 
 No API keys or external services are required to run the current build. All data is served locally via `DataProvider.java`.
-
 ---
 
 ## Branch Strategy
@@ -130,7 +128,6 @@ main                    ← stable, reviewed code only
 - No direct pushes to `main`
 - All work goes to your feature branch → PR into `develop` → reviewed → merged to `main`
 - Commit format: `[area] Short description` — e.g. `[user] Add ManagerListActivity` or `[manager] Wire RequestsFragment adapter`
-
 ---
 
 ## Team
@@ -141,7 +138,6 @@ main                    ← stable, reviewed code only
 | Parth | User flow |
 | Farhan | Manager flow |
 | Mehak | Manager flow |
-
 ---
 
 ## Roadmap
